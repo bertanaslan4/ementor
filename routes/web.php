@@ -12,6 +12,8 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\RelationsController;
 use App\Http\Controllers\Admin\FaqsController as AdminFaqsController;
 use App\Http\Controllers\Admin\MenuController as AdminMenuController;
+use App\Http\Controllers\CommentsController;
+use App\Http\Controllers\MessagesController;
 
 
 /*
@@ -39,9 +41,14 @@ Route::middleware('auth')->group(function () {
     Route::get('/myblogs', [DashboardController::class, 'myBlogs'])->name('myblogs');
     Route::get('/addblog', [DashboardController::class, 'addBlog'])->name('addblog');
     Route::post('/storeBlog', [DashboardController::class, 'storeBlog'])->name('storeBlog');
-    Route::get('/messages', [DashboardController::class, 'messages'])->name('messages');
-    Route::get('/mentees', [DashboardController::class, 'mentees'])->name('mentees');
+    Route::get('/editBlog/{id}', [DashboardController::class, 'editBlog'])->name('editBlog');
+    Route::post('/updateBlog', [DashboardController::class, 'updateBlog'])->name('updateBlog');
+    Route::delete('/deleteBlog/{id}', [DashboardController::class, 'deleteBlog'])->name('deleteBlog');
+    Route::get('/messages', [MessagesController::class, 'index'])->name('messages');
     Route::get('/profilesettings', [DashboardController::class, 'profilesettings'])->name('profilesettings');
+    Route::post('/profilesettings', [DashboardController::class, 'updateProfile'])->name('profilesettings.update');
+    Route::post('comment',[CommentsController::class, 'create'])->name('comment.create');
+    Route::get('/chat',[MessagesController::class, 'chat'])->name('chat');
 });
 
 
@@ -51,6 +58,7 @@ Route::get('/infoblogs/{id}', [InfoBlogsController::class, 'detail'])->name('blo
 Route::get('/faqs', [FaqsController::class, 'index'])->name('faqs');
 Route::get('/mentors', [MentorsController::class, 'index'])->name('mentors');
 Route::get('/menu/detail/{id}', [PageController::class, 'menu'])->name('menu.detail');
+
 
 //Admin
 Route::prefix('admin')->group(function () {

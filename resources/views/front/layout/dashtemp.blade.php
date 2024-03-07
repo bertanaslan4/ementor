@@ -1,20 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<!-- Mirrored from mentoring.dreamstechnologies.com/html/template/index-seven.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 18 Dec 2023 20:23:54 GMT -->
 <head>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
     <title>Mentoring</title>
+    <!-- Datetimepicker CSS -->
 
     @include('front.layout.partials.css')
+    <link rel="stylesheet" href="{{asset('front/css/bootstrap-datetimepicker.min.css')}}">
 </head>
 <body>
 
 <!-- Main Wrapper -->
 <div class="main-wrapper">
-
+    @include('sweetalert::alert')
     @include('front.layout.header.header')
 
     <!-- Breadcrumb -->
@@ -25,7 +26,6 @@
                     <nav aria-label="breadcrumb" class="page-breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{route('home')}}">Home</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
                         </ol>
                     </nav>
                     <h2 class="breadcrumb-title">Dashboard</h2>
@@ -57,8 +57,8 @@
 <!-- /Main Wrapper -->
 
 @include('front.layout.partials.js')
-
+<!-- Datetimepicker JS -->
+<script src="{{asset('front/js/moment.min.js')}}"></script>
+<script src="{{asset('front/js/bootstrap-datetimepicker.min.js')}}"></script>
 </body>
-
-<!-- Mirrored from mentoring.dreamstechnologies.com/html/template/index-seven.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 18 Dec 2023 20:23:59 GMT -->
 </html>

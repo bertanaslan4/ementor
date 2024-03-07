@@ -3,16 +3,10 @@
 @section('content')
     <!-- Breadcrumb -->
     <div class="breadcrumb-bar">
-        <div class="container-fluid">
-            <div class="row align-items-center">
+        <div class="container">
+            <div class="row text-center">
                 <div class="col-md-12 col-12">
-                    <nav aria-label="breadcrumb" class="page-breadcrumb">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{route('home')}}">Home</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Blog</li>
-                        </ol>
-                    </nav>
-                    <h2 class="breadcrumb-title">Blog Grid</h2>
+                    <h2 class="breadcrumb-title">Bloglar</h2>
                 </div>
             </div>
         </div>
@@ -39,7 +33,12 @@
                                         <ul class="entry-meta meta-item">
                                             <li>
                                                 <div class="post-author">
-                                                    <a href="profile.html"><img src="assets/img/user/user1.jpg" alt="Post Author"> <span>{{$blog->user->name}}</span></a>
+                                                    @if($blog->user->photo)
+                                                       <img src="{{asset('images/profile/'.$blog->user->photo)}}" alt="Post Author"> <span>{{$blog->user->name}} {{$blog->user->surname}}</span>
+                                                    @else
+                                                        <img src="{{asset('front/img/avatar_photo.jpg')}}" alt="Post Author"> <span>{{$blog->user->name}} {{$blog->user->surname}}</span>
+                                                    @endif
+
                                                 </div>
                                             </li>
                                             <li><i class="far fa-clock"></i> {{$blog->created_at->format('d-m-Y')}}</li>

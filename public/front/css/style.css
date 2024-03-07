@@ -1442,7 +1442,10 @@ button.bg-danger:hover {
 /*-----------------
 	8. Components
 -----------------------*/
-
+.uploaded-photo img{
+    max-width: 350px;
+    max-height: 350px;
+}
 .comp-header {
     margin-bottom: 1.875rem;
 }
@@ -8072,9 +8075,9 @@ html.menu-opened body {
 	background-color: #f5f5f6;
 }
 .chat-cont-right {
-    -ms-flex: 0 0 65%;
-    flex: 0 0 65%;
-    max-width: 65%;
+    -ms-flex: 0 0 100%;
+    flex: 0 0 100%;
+    max-width: 100%;
 }
 .chat-cont-right .chat-header {
 	-webkit-box-align: center;

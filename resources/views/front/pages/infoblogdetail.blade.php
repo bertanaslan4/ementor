@@ -3,16 +3,10 @@
 @section('content')
     <!-- Breadcrumb -->
     <div class="breadcrumb-bar">
-        <div class="container-fluid">
-            <div class="row align-items-center">
+        <div class="container">
+            <div class="row text-center">
                 <div class="col-md-12 col-12">
-                    <nav aria-label="breadcrumb" class="page-breadcrumb">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{route('home')}}">Home</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Blog</li>
-                        </ol>
-                    </nav>
-                    <h2 class="breadcrumb-title">Blog Details</h2>
+                    <h2 class="breadcrumb-title">Bloglar</h2>
                 </div>
             </div>
         </div>
@@ -36,12 +30,15 @@
                                     <ul>
                                         <li>
                                             <div class="post-author">
-                                                <a href="profile.html"><img src="assets/img/user/user.jpg" alt="Post Author"> <span>{{$blog->user->name}}</span></a>
+                                                @if($blog->user->photo)
+                                                    <a href="profile.html"><img src="{{asset('images/profile/'.$blog->user->photo)}}" alt="Post Author"> <span>{{$blog->user->name}} {{$blog->user->surname}}</span></a>
+                                                @else
+                                                    <a><img src="{{asset('front/img/avatar_photo.jpg')}}" alt="Post Author"> <span>{{$blog->user->name}} {{$blog->user->surname}}</span></a>
+                                                @endif
+
                                             </div>
                                         </li>
                                         <li><i class="far fa-calendar"></i>{{$blog->created_at->format('d-m-Y')}}</li>
-                                        <li><i class="far fa-comments"></i>12 Comments</li>
-                                        <li><i class="fa fa-tags"></i>HTML</li>
                                     </ul>
                                 </div>
                             </div>
@@ -64,142 +61,95 @@
                                 </ul>
                             </div>
                         </div>
-                        <div class="card author-widget clearfix">
-                            <div class="card-header">
-                                <h4 class="card-title">About Author</h4>
-                            </div>
-                            <div class="card-body">
-                                <div class="about-author">
-                                    <div class="about-author-img">
-                                        <div class="author-img-wrap">
-                                            <a href="profile.html"><img class="img-fluid rounded-circle" alt="" src="assets/img/user/user1.jpg"></a>
+                        @if($blog->user->userInfo->first()->about)
+                            <div class="card author-widget clearfix">
+                                <div class="card-header">
+                                    <h4 class="card-title">Mentor Hakkında</h4>
+                                </div>
+                                <div class="card-body">
+                                    <div class="about-author">
+                                        <div class="about-author-img">
+                                            <div class="author-img-wrap">
+                                                @if($blog->user->photo)
+                                                    <a href="profile.html"><img class="img-fluid rounded-circle" src="{{asset('images/profile/'.$blog->user->photo)}}" alt="Post Author"></a>
+                                                @else
+                                                    <a><img class="img-fluid rounded-circle" src="{{asset('front/img/avatar_photo.jpg')}}" alt="Post Author"></a>
+                                                @endif
+
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="author-details">
-                                        <a href="profile.html" class="blog-author-name">Darren Elder</a>
-                                        <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</p>
+                                        <div class="author-details">
+                                            <a href="profile.html" class="blog-author-name">{{$blog->user->name}} {{$blog->user->surname}}</a>
+                                            <p class="mb-0">{{$blog->user->userInfo->first()->about}}</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        @endif
+
                         <div class="card blog-comments clearfix">
                             <div class="card-header">
-                                <h4 class="card-title">Comments (12)</h4>
+                                <h4 class="card-title">Yorumlar ({{ count($comments) }})</h4>
                             </div>
                             <div class="card-body pb-0">
                                 <ul class="comments-list">
-                                    <li>
-                                        <div class="comment">
-                                            <div class="comment-author">
-                                                <img class="avatar" alt="" src="assets/img/user/user4.jpg">
-                                            </div>
-                                            <div class="comment-block">
-													<span class="comment-by">
-														<span class="blog-author-name">Michelle Fairfax</span>
-													</span>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae, gravida pellentesque urna varius vitae. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                                <p class="blog-date">Dec 6, 2017</p>
-                                                <a class="comment-btn" href="#">
-                                                    <i class="fas fa-reply"></i> Reply
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <ul class="comments-list reply">
-                                            <li>
-                                                <div class="comment">
-                                                    <div class="comment-author">
-                                                        <img class="avatar" alt="" src="assets/img/user/user5.jpg">
-                                                    </div>
-                                                    <div class="comment-block">
-															<span class="comment-by">
-																<span class="blog-author-name">Gina Moore</span>
-															</span>
-                                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae, gravida pellentesque urna varius vitae.</p>
-                                                        <p class="blog-date">Dec 6, 2017</p>
-                                                        <a class="comment-btn" href="#">
-                                                            <i class="fas fa-reply"></i> Reply
-                                                        </a>
-                                                    </div>
+                                    @foreach($comments as $comment)
+                                        <li>
+                                            <div class="comment">
+                                                <div class="comment-author">
+                                                    @if($comment->user->photo)
+                                                        <img class="avatar" alt="" src="{{asset('images/profile/'.$comment->user->photo)}}">
+                                                    @else
+                                                        <img class="avatar" alt="" src="{{asset('front/img/avatar_photo.jpg')}}">
+                                                    @endif
                                                 </div>
-                                            </li>
-                                            <li>
-                                                <div class="comment">
-                                                    <div class="comment-author">
-                                                        <img class="avatar" alt="" src="assets/img/user/user3.jpg">
-                                                    </div>
-                                                    <div class="comment-block">
-															<span class="comment-by">
-																<span class="blog-author-name">Carl Kelly</span>
-															</span>
-                                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae, gravida pellentesque urna varius vitae.</p>
-                                                        <p class="blog-date">December 7, 2017</p>
-                                                        <a class="comment-btn" href="#">
-                                                            <i class="fas fa-reply"></i> Reply
-                                                        </a>
-                                                    </div>
+                                                <div class="comment-block">
+													<span class="comment-by">
+														<span class="blog-author-name">{{$comment->user->name}} {{$comment->user->surname}}</span>
+													</span>
+                                                    <p><b>{{$comment->title}}</b></p>
+                                                    <p>{{$comment->text}}</p>
+                                                    <p class="blog-date">{{$comment->created_at->format('d-m-Y')}}</p>
+
                                                 </div>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <div class="comment">
-                                            <div class="comment-author">
-                                                <img class="avatar" alt="" src="assets/img/user/user6.jpg">
                                             </div>
-                                            <div class="comment-block">
-													<span class="comment-by">
-														<span class="blog-author-name">Elsie Gilley</span>
-													</span>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                                <p class="blog-date">December 11, 2017</p>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="comment">
-                                            <div class="comment-author">
-                                                <img class="avatar" alt="" src="assets/img/user/user7.jpg">
-                                            </div>
-                                            <div class="comment-block">
-													<span class="comment-by">
-														<span class="blog-author-name">Joan Gardner</span>
-													</span>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                                <p class="blog-date">December 13, 2017</p>
-                                                <a class="comment-btn" href="#">
-                                                    <i class="fas fa-reply"></i> Reply
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </li>
+
+                                        </li>
+                                    @endforeach
+
                                 </ul>
                             </div>
                         </div>
 
-                        <div class="card new-comment clearfix">
-                            <div class="card-header">
-                                <h4 class="card-title">Leave Comment</h4>
+                        @if(auth()->user()->role ==2)
+                            <div class="card new-comment clearfix">
+                                <div class="card-header">
+                                    <h4 class="card-title">Yorum Yapın</h4>
+                                </div>
+                                <div class="card-body">
+                                    <form action="{{route('comment.create')}}" method="post">
+                                        @csrf
+                                        <div class="form-group">
+                                            <input type="hidden" name="user_id" value="{{auth()->user()->id}}" class="form-control">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="hidden" name="blog_id" value="{{$blog->id}}" class="form-control">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Başlık</label>
+                                            <input type="text" name="title" placeholder="Başlık(*)" class="form-control" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Yorum</label>
+                                            <textarea rows="4" name="text" class="form-control" required></textarea>
+                                        </div>
+                                        <div class="submit-section">
+                                            <button class="btn btn-primary submit-btn" type="submit">Gönder</button>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
-                            <div class="card-body">
-                                <form>
-                                    <div class="form-group">
-                                        <label>Name <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Your Email Address <span class="text-danger">*</span></label>
-                                        <input type="email" class="form-control">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Comments</label>
-                                        <textarea rows="4" class="form-control"></textarea>
-                                    </div>
-                                    <div class="submit-section">
-                                        <button class="btn btn-primary submit-btn" type="submit">Submit</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
+                        @endif
 
                     </div>
                 </div>

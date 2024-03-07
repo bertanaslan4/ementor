@@ -62,20 +62,38 @@
                     <li class="nav-item dropdown has-arrow logged-item">
                         <a href="#" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
 								<span class="user-img">
-									<img class="rounded-circle" src="{{asset('front/img/user/user.jpg')}}"  width="31" alt="Darren Elder">
+									@if(auth()->user()->photo)
+                                        <img src="{{asset('images/profile/'.auth()->user()->photo)}}" width="32" alt="User Image" class="avatar-img rounded-circle">
+                                    @else
+                                        <img src="{{asset('front/img/avatar_photo.jpg')}}"  width="32" alt="User Image" class="avatar-img rounded-circle">
+                                    @endif
 								</span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end">
                             <div class="user-header">
                                 <div class="avatar avatar-sm">
-                                    <img src="assets/img/user/user.jpg" alt="User Image" class="avatar-img rounded-circle">
+                                    @if(auth()->user()->photo)
+                                        <img src="{{asset('images/profile/'.auth()->user()->photo)}}" alt="User Image" class="avatar-img rounded-circle">
+                                    @else
+                                        <img src="{{asset('front/img/avatar_photo.jpg')}}"  alt="User Image" class="avatar-img rounded-circle">
+                                    @endif
+
                                 </div>
                                 <div class="user-text">
-                                    <h6>{{auth()->user()->name}}</h6>
-                                    <p class="text-muted mb-0">Mentor</p>
+                                    <h6>{{auth()->user()->name}} {{auth()->user()->surname}}</h6>
+                                    @if(auth()->user()->role == 1)
+                                        <p class="text-muted mb-0">Mentor</p>
+                                    @else
+                                        <p class="text-muted mb-0">Mentee</p>
+                                    @endif
                                 </div>
                             </div>
-                            <a class="dropdown-item" href="{{route('dashboard')}}">Dashboard</a>
+                            @if(auth()->user()->role == 1)
+                                <a class="dropdown-item" href="{{route('dashboard')}}">Dashboard</a>
+                                @else
+                                <a class="dropdown-item" href="{{route('chat')}}">Mesajlar</a>
+                            @endif
+
                             <a class="dropdown-item" href="#" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Çıkış Yap
                             <form id="logout-form" action="{{route('logout')}}" method="POST" style="display: none;">
                                 @csrf

@@ -9,7 +9,7 @@
                     <div class="card-body">
                         <h3 class="pb-3">Add Blog</h3>
 
-                        <form action="{{route('storeBlog')}}" method="post" enctype="multipart/form-data">
+                        <form action="{{route('updateBlog')}}" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="service-fields mb-3">
                                 <h4 class="heading-2">Bilgi Kaynağı Girişi</h4>
@@ -18,7 +18,7 @@
                                         <div class="form-group">
                                             <div class="change-avatar">
                                                 <div class="uploaded-photo">
-
+                                                    <img src="{{asset('images/'.$blog->photo)}}">
                                                 </div>
                                                 <div class="upload-img">
                                                     <div class="change-photo-btn">
@@ -33,11 +33,16 @@
                                     <div class="col-lg-12">
                                         <div class="form-group">
                                             <label>Başlık <span class="text-danger">*</span></label>
-                                            <input class="form-control" name="title" type="text" placeholder="Başlık">
+                                            <input class="form-control" name="title" type="text" value="{{$blog->title}}">
+                                        </div>
+                                        <div class="form-group">
+
+                                            <input class="form-control" name="id" type="hidden" value="{{$blog->id}}">
                                         </div>
                                     </div>
                                 </div>
                             </div>
+
 
                             <div class="service-fields mb-3">
 
@@ -45,7 +50,7 @@
                                     <div class="col-lg-12">
                                         <div class="form-group">
                                             <label>Kısa Özet: <span class="text-danger">*</span></label>
-                                            <textarea id="about" class="form-control service-desc" name="short_text"></textarea>
+                                            <textarea id="about" class="form-control service-desc" name="short_text">{{$blog->short_text}}</textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -56,7 +61,7 @@
                                     <div class="col-lg-12">
                                         <div class="form-group">
                                             <label>İçerik <span class="text-danger">*</span></label>
-                                            <textarea id="about" class="form-control service-desc" name="text"></textarea>
+                                            <textarea id="about" class="form-control service-desc" name="text">{{$blog->text}}</textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -137,5 +142,4 @@
             previewPhoto(this);
         });
     </script>
-
 @endsection

@@ -11,12 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('user_infos', function (Blueprint $table) {
+        Schema::create('user_info', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->string('type');
-            $table->string('value');
+            $table->string('phone')->nullable();
+            $table->text('address')->nullable();
+            $table->string('birthday')->nullable();
+            $table->string('city')->nullable();
+            $table->string('state')->nullable();
+            $table->text('about')->nullable();
             $table->timestamps();
         });
     }
@@ -26,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('user_infos');
+        Schema::dropIfExists('user_info');
     }
 };

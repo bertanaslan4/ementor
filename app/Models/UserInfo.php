@@ -8,9 +8,18 @@ use Illuminate\Database\Eloquent\Model;
 class UserInfo extends Model
 {
     use HasFactory;
+    protected $table = 'user_info';
     protected $fillable = [
         'user_id',
-        'type',
-        'value',
+        'phone',
+        'address',
+        'birthday',
+        'city',
+        'state',
+        'about',
     ];
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
