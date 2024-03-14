@@ -15,14 +15,18 @@
                         <div class="row align-items-center">
                             <div class="col-auto profile-image">
                                 <a href="#">
-                                    <img class="rounded-circle" alt="User Image" src="assets/img/profiles/avatar-12.jpg">
+                                    @if($user->photo)
+                                        <img class="rounded-circle" alt="User Image" src="{{asset('images/profile/'.$user->photo)}}">
+                                    @else
+                                        <img class="rounded-circle" alt="User Image" src="{{asset('front/img/avatar_photo.jpg')}}">
+                                    @endif
                                 </a>
                             </div>
                             <div class="col ms-md-n2 profile-user-info">
-                                <h4 class="user-name mb-0">Allen Davis</h4>
+                                <h4 class="user-name mb-0">{{$user->name}} {{$user->surname}}</h4>
                                 <h6 class="text-muted"><a href="https://mentoring.dreamstechnologies.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b0d1dcdcd5ded4d1c6d9c3f0d1d4ddd9de9ed3dfdd">[email&#160;protected]</a></h6>
-                                <div class="pb-3"><i class="fa fa-map-marker"></i> Florida, United States</div>
-                                <div class="about-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
+                                <div class="pb-3"><i class="fa fa-map-marker"></i> @if($user->userInfo) {{$user->userInfo->first()->city}}, {{$user->userInfo->first()->state}}@endif</div>
+                                <div class="about-text">@if($user->Info) {{$user->userInfo->first()->about ? : ''}} @endif</div>
                             </div>
                             <div class="col-auto profile-btn">
                             </div>
@@ -31,10 +35,10 @@
                     <div class="profile-menu">
                         <ul class="nav nav-tabs nav-tabs-solid">
                             <li class="nav-item">
-                                <a class="nav-link active" data-bs-toggle="tab" href="#per_details_tab">About</a>
+                                <a class="nav-link active" data-bs-toggle="tab" href="#per_details_tab">Detaylar</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-bs-toggle="tab" href="#password_tab">Password</a>
+                                <a class="nav-link" data-bs-toggle="tab" href="#password_tab">Eşleşme</a>
                             </li>
                         </ul>
                     </div>
@@ -49,31 +53,28 @@
                                     <div class="card">
                                         <div class="card-body">
                                             <h5 class="card-title d-flex justify-content-between">
-                                                <span>Personal Details</span>
-                                                <a class="edit-link" data-bs-toggle="modal" href="#edit_personal_details"><i class="fa fa-edit me-1"></i>Edit</a>
+                                                <span>Detaylar</span>
+
                                             </h5>
                                             <div class="row">
-                                                <p class="col-sm-2 text-muted mb-0 mb-sm-3">Name</p>
-                                                <p class="col-sm-10">Allen Davis</p>
+                                                <p class="col-sm-2 text-muted mb-0 mb-sm-3">İsim</p>
+                                                <p class="col-sm-10">{{$user->name}} {{$user->surname}}</p>
                                             </div>
                                             <div class="row">
-                                                <p class="col-sm-2 text-muted mb-0 mb-sm-3">Date of Birth</p>
-                                                <p class="col-sm-10">24 Jul 1983</p>
+                                                <p class="col-sm-2 text-muted mb-0 mb-sm-3">Doğum Günü </p>
+                                                <p class="col-sm-10">@if($user->userInfo) {{$user->userInfo->first()->birthday ? : ''}} @endif</p>
                                             </div>
                                             <div class="row">
-                                                <p class="col-sm-2 text-muted mb-0 mb-sm-3">Email ID</p>
-                                                <p class="col-sm-10"><a href="https://mentoring.dreamstechnologies.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7f1e13131a111b1e09160c3f1a071e120f131a511c1012">[email&#160;protected]</a></p>
+                                                <p class="col-sm-2 text-muted mb-0 mb-sm-3">Email </p>
+                                                <p class="col-sm-10">{{$user->email}}</p>
                                             </div>
                                             <div class="row">
-                                                <p class="col-sm-2 text-muted mb-0 mb-sm-3">Mobile</p>
-                                                <p class="col-sm-10">305-310-5857</p>
+                                                <p class="col-sm-2 text-muted mb-0 mb-sm-3">Telefon</p>
+                                                <p class="col-sm-10">@if($user->userInfo) {{$user->userInfo->first()->phone ? : ''}} @endif</p>
                                             </div>
                                             <div class="row">
-                                                <p class="col-sm-2 text-muted mb-0">Address</p>
-                                                <p class="col-sm-10 mb-0">4663  Agriculture Lane,<br>
-                                                    Miami,<br>
-                                                    Florida - 33165,<br>
-                                                    United States.</p>
+                                                <p class="col-sm-2 text-muted mb-0">Adres</p>
+                                                <p class="col-sm-10 mb-0">@if($user->userInfo) {{$user->userInfo->first()->address ? : ''}} @endif</p>
                                             </div>
                                         </div>
                                     </div>
@@ -91,30 +92,110 @@
                         <!-- Change Password Tab -->
                         <div id="password_tab" class="tab-pane fade">
 
-                            <div class="card">
-                                <div class="card-body">
-                                    <h5 class="card-title">Change Password</h5>
+                            @if($user->role == 1)
+                                @if($user->mentor)
+                                    <!-- Personal Details -->
                                     <div class="row">
-                                        <div class="col-md-10 col-lg-6">
-                                            <form>
-                                                <div class="form-group">
-                                                    <label>Old Password</label>
-                                                    <input type="password" class="form-control">
+                                        <div class="col-lg-12">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <h5 class="card-title d-flex justify-content-between">
+                                                        <span>Detaylar</span>
+
+                                                    </h5>
+                                                    <div class="row">
+                                                        <p class="col-sm-2 text-muted mb-0 mb-sm-3">İsim</p>
+                                                        <p class="col-sm-10">{{$user->mentor->first()->mentee->name}} {{$user->mentor->first()->mentee->surname}}</p>
+                                                    </div>
+
+                                                    <div class="row">
+                                                        <p class="col-sm-2 text-muted mb-0 mb-sm-3">Email </p>
+                                                        <p class="col-sm-10">{{$user->mentor->first()->mentee->email}}</p>
+                                                    </div>
+
                                                 </div>
-                                                <div class="form-group">
-                                                    <label>New Password</label>
-                                                    <input type="password" class="form-control">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Confirm Password</label>
-                                                    <input type="password" class="form-control">
-                                                </div>
-                                                <button class="btn btn-primary" type="submit">Save Changes</button>
-                                            </form>
+                                            </div>
+
+
                                         </div>
+
+
                                     </div>
-                                </div>
-                            </div>
+                                    <!-- /Personal Details -->
+                                    @else
+                                    <!-- Personal Details -->
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <h5 class="card-title d-flex justify-content-between">
+                                                        <span>Eşleşme Yok</span>
+
+                                                    </h5>
+
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+
+
+                                    </div>
+                                    <!-- /Personal Details -->
+                                @endif
+                            @else
+                                @if($user->mentee)
+                                    <!-- Personal Details -->
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <h5 class="card-title d-flex justify-content-between">
+                                                        <span>Detaylar</span>
+
+                                                    </h5>
+                                                    <div class="row">
+                                                        <p class="col-sm-2 text-muted mb-0 mb-sm-3">İsim</p>
+                                                        <p class="col-sm-10">{{$user->mentee->first()->mentor->name}} {{$user->mentee->first()->mentor->surname}}</p>
+                                                    </div>
+
+                                                    <div class="row">
+                                                        <p class="col-sm-2 text-muted mb-0 mb-sm-3">Email </p>
+                                                        <p class="col-sm-10">{{$user->mentee->first()->mentor->email}}</p>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+
+
+                                    </div>
+                                    <!-- /Personal Details -->
+                                @else
+                                    <!-- Personal Details -->
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <h5 class="card-title d-flex justify-content-between">
+                                                        <span>Eşleşme Yok</span>
+
+                                                    </h5>
+
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+
+
+                                    </div>
+                                    <!-- /Personal Details -->
+                                @endif
+                            @endif
+
                         </div>
                         <!-- /Change Password Tab -->
 

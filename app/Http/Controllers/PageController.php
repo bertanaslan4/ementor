@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Faqs;
 use App\Models\InfoBlogs;
 use App\Models\Menu;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class PageController extends Controller

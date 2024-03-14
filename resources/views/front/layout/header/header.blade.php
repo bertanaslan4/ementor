@@ -91,7 +91,11 @@
                             @if(auth()->user()->role == 1)
                                 <a class="dropdown-item" href="{{route('dashboard')}}">Dashboard</a>
                                 @else
-                                <a class="dropdown-item" href="{{route('chat')}}">Mesajlar</a>
+                                <a class="dropdown-item" href="{{route('profile',auth()->user()->id)}}">Profilim</a>
+                                    @if(session('mentor')!=null)
+                                        <a class="dropdown-item" href="{{route('chat',session('mentor'))}}">Mesajlar</a>
+                                    @endif
+
                             @endif
 
                             <a class="dropdown-item" href="#" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Çıkış Yap

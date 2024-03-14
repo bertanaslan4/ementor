@@ -7,6 +7,7 @@
 
     @include('admin.partials.css')
     @yield('styles')
+
 </head>
 <body>
 
@@ -21,6 +22,7 @@
 
 </div>
 <!-- /Main Wrapper -->
+
 @include('admin.partials.js')
 @yield('scripts')
 

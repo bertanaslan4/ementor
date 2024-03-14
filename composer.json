@@ -10,7 +10,10 @@
         "laravel/framework": "^10.10",
         "laravel/sanctum": "^3.3",
         "laravel/tinker": "^2.8",
-        "realrashid/sweet-alert": "^7.1"
+        "munafio/chatify": "^1.6",
+        "pusher/pusher-php-server": "^7.2",
+        "realrashid/sweet-alert": "^7.1",
+      "ext-dom": "*"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",

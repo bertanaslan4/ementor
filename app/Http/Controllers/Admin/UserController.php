@@ -37,7 +37,9 @@ class UserController extends Controller
     }
     public function detail($id)
     {
-        return view('admin.pages.profile');
+        $user = User::find($id)->with('mentor.mentee', 'mentee.mentor','userInfo')->first();
+        //dd($user->mentor->first()->mentee);
+        return view('admin.pages.profile', compact('user'));
     }
     public function approve($id)
     {

@@ -1,6 +1,10 @@
 @extends('admin.app')
 @section('styles')
-    <!-- -->
+    <script src="{{asset('front/js/jquery-3.6.0.min.js')}}"></script>
+    <!-- include libraries(jQuery, bootstrap) -->
+
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 @endsection
 @section('content')
     <!-- Page Wrapper -->
@@ -52,7 +56,7 @@
 
                                         <div class="form-group">
                                             <label>İçerik</label>
-                                            <textarea cols="30" name="content"  rows="6" class="form-control">{{$menuContent->content}}</textarea>
+                                            <textarea id="content" cols="30" name="content"  rows="6" class="form-control">{{$menuContent->content}}</textarea>
                                         </div>
 
                                         <div class="m-t-20 text-center">
@@ -70,14 +74,36 @@
 
         </div>
     </div>
+    <script>
+        $('#content').summernote({
+            placeholder: 'Hakkımda',
+            tabsize: 2,
+            height: 300,
+            toolbar: [
+                ['style', ['style']],
+                ['font', ['bold', 'underline', 'clear']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['table', ['table']],
+                ['insert', ['link', 'picture', 'video']],
+                ['view', ['fullscreen', 'codeview', 'help']]
+            ]
+        });
+    </script>
+
     <!-- /Page Wrapper -->
 @endsection
 @section('scripts')
+    <script>
+
+    </script>
     <script src="{{ asset('admin/assets/plugins/select2/js/select2.min.js') }}"></script>
     <script>
+
         $(".select").select2({
             tags: true,
             theme: "default"
         });
+
     </script>
 @endsection

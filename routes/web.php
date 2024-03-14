@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\FaqsController as AdminFaqsController;
 use App\Http\Controllers\Admin\MenuController as AdminMenuController;
 use App\Http\Controllers\CommentsController;
 use App\Http\Controllers\MessagesController;
+use App\Http\Controllers\UserInfoController;
 
 
 /*
@@ -44,11 +45,18 @@ Route::middleware('auth')->group(function () {
     Route::get('/editBlog/{id}', [DashboardController::class, 'editBlog'])->name('editBlog');
     Route::post('/updateBlog', [DashboardController::class, 'updateBlog'])->name('updateBlog');
     Route::delete('/deleteBlog/{id}', [DashboardController::class, 'deleteBlog'])->name('deleteBlog');
-    Route::get('/messages', [MessagesController::class, 'index'])->name('messages');
+    Route::get('/messages/{id}', [MessagesController::class, 'index'])->name('messages');
+    Route::post('/broadcast', [MessagesController::class, 'broadcast']);
+    Route::post('/receive', [MessagesController::class, 'receive']);
+    Route::post('/send-mentee-message', [MessagesController::class, 'sendMessage'])->name('send-mentee-message');
+
     Route::get('/profilesettings', [DashboardController::class, 'profilesettings'])->name('profilesettings');
     Route::post('/profilesettings', [DashboardController::class, 'updateProfile'])->name('profilesettings.update');
     Route::post('comment',[CommentsController::class, 'create'])->name('comment.create');
-    Route::get('/chat',[MessagesController::class, 'chat'])->name('chat');
+    Route::get('/chat/{id}',[MessagesController::class, 'chat'])->name('chat');
+    Route::get('/profile/{id}',[UserInfoController::class,'index'])->name('profile');
+    Route::get('/profileset',[UserInfoController::class,'profile'])->name('profileset');
+    Route::post('/profileset',[UserInfoController::class,'updateProfile'])->name('profileset.update');
 });
 
 

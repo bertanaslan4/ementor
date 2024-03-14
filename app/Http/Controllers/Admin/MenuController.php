@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Menu;
 use App\Models\MenuContent;
+use DOMDocument;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -43,6 +44,32 @@ class MenuController extends Controller
         $menuContent = new MenuContent;
         $menuContent->name = $name;
         $menuContent->menu_id = $menu_id;
+        $dom = new DOMDocument();
+        libxml_use_internal_errors(true);
+        $dom->loadHTML($content);
+        libxml_clear_errors();
+        $images = $dom->getElementsByTagName('img');
+
+        foreach ($images as $item=>$image) {
+            $data = $image->getAttribute('src');
+
+            list($type, $data) = explode(';', $data);
+
+            list(, $data)      = explode(',', $data);
+
+            $imgeData = base64_decode($data);
+
+            $image_name= "/images/docs" . time().$item.'.png';
+
+            $path = public_path() . $image_name;
+
+            file_put_contents($path, $imgeData);
+
+            $image->removeAttribute('src');
+
+            $image->setAttribute('src', $image_name);
+        }
+        $content = $dom->saveHTML();
         $menuContent->content = $content;
         $menuContent->save();
         Alert::success('Başarılı', 'Menü içeriği başarıyla eklendi');
@@ -68,6 +95,32 @@ class MenuController extends Controller
         $menuContent = MenuContent::find($id);
         $menuContent->name = $name;
         $menuContent->menu_id = $menu_id;
+        $dom = new DOMDocument();
+        libxml_use_internal_errors(true);
+        $dom->loadHTML($content);
+        libxml_clear_errors();
+        $images = $dom->getElementsByTagName('img');
+
+        foreach ($images as $item=>$image) {
+            $data = $image->getAttribute('src');
+
+            list($type, $data) = explode(';', $data);
+
+            list(, $data)      = explode(',', $data);
+
+            $imgeData = base64_decode($data);
+
+            $image_name= "/images/docs" . time().$item.'.png';
+
+            $path = public_path() . $image_name;
+
+            file_put_contents($path, $imgeData);
+
+            $image->removeAttribute('src');
+
+            $image->setAttribute('src', $image_name);
+        }
+        $content = $dom->saveHTML();
         $menuContent->content = $content;
         $menuContent->save();
         Alert::success('Başarılı', 'Menü içeriği başarıyla güncellendi');

@@ -13,11 +13,13 @@
                             <div class="form-group">
                                 <div class="change-avatar">
                                     <div class="profile-img">
-                                        @if($user->photo)
-                                            <img src="{{asset('images/profile/'.$user->photo)}}" alt="User Image">
+                                        <div class="uploaded-photo">
+                                            @if($user->photo)
+                                                <img src="{{asset('images/profile/'.$user->photo)}}" alt="User Image">
                                             @else
-                                            <img src="{{asset('front/img/avatar_photo.jpg')}}" alt="User Image">
-                                        @endif
+                                                <img src="{{asset('front/img/avatar_photo.jpg')}}" alt="User Image">
+                                            @endif
+                                        </div>
                                     </div>
                                     <div class="upload-img">
                                         <div class="change-photo-btn">
@@ -104,5 +106,30 @@
             </div>
         </div>
     </div>
+    <script>
+        function previewPhoto(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
 
+                reader.onload = function (e) {
+                    // Resim önizlemesi için bir img elementi oluştur
+                    var imgElement = document.createElement("img");
+                    imgElement.src = e.target.result;
+
+
+                    // Profil resmi alanını temizle ve yeni resmi ekleyin
+                    var profileImgDiv = document.querySelector(".uploaded-photo");
+                    profileImgDiv.innerHTML = "";
+                    profileImgDiv.appendChild(imgElement);
+                };
+
+                reader.readAsDataURL(input.files[0]); // Resmi oku ve base64 olarak al
+            }
+        }
+
+        // Dosya seçildiğinde önizleme işlevini çağır
+        document.querySelector('input[name="photo"]').addEventListener("change", function () {
+            previewPhoto(this);
+        });
+    </script>
 @endsection

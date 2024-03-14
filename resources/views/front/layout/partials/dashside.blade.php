@@ -7,7 +7,8 @@
                     <img src="{{asset('images/profile/'.auth()->user()->photo)}}" width="100" alt="User Image" class="avatar-img rounded-circle">
                 @else
                     <img src="{{asset('front/img/avatar_photo.jpg')}}" width="100"  alt="User Image" class="avatar-img rounded-circle">
-                @endif</div>
+                @endif
+            </div>
 
             <div class="user-info-cont">
                 <h4 class="usr-name">{{auth()->user()->name}} {{auth()->user()->surname}}</h4>
@@ -18,7 +19,9 @@
                 <li><a href="{{route('dashboard')}}"><i class="fas fa-home"></i>Dashboard <span><i class="fas fa-chevron-right"></i></span></a></li>
                 <li><a href="{{route('myblogs')}}"><i class="fab fa-blogger-b"></i>Bloglarım <span><i class="fas fa-chevron-right"></i></span></a></li>
                 <li><a href="{{route('addblog')}}"><i class="fab fa-blogger-b"></i>Blog Ekle <span><i class="fas fa-plus"></i></span></a></li>
-                <li><a href="{{route('messages')}}"><i class="fas fa-comments"></i>Mesajlarım <span><i class="fas fa-chevron-right"></i></span></a></li>
+                @if(!is_null($mentee))
+                    <li><a href="{{route('messages',$mentee->id)}}"><i class="fas fa-comments"></i>Mesajlarım <span><i class="fas fa-chevron-right"></i></span></a></li>
+                @endif
                 <li><a href="{{route('profilesettings')}}"><i class="fas fa-user-cog"></i>Profil Ayarları<span><i class="fas fa-chevron-right"></i></span></a></li>
                 <li><a href="#" onclick="event.preventDefault();document.getElementById('logout-form').submit();"><i class="fas fa-sign-out-alt"></i>Çıkış Yap<span><i class="fas fa-chevron-right"></i></span>
                         <form id="logout-form" action="{{route('logout')}}" method="POST" style="display: none;">

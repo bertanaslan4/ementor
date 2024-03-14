@@ -27,33 +27,32 @@ class DashboardController extends Controller
             ->with('mentor', 'mentor.mentee')
             ->get();
         $mentor= $userCollection[0];
-        if($mentor->mentor){
-            $mentee= $mentor->mentor->first()->mentee;
-        }
-        else
-        {
-            $mentee= null;
-        }
+        $mentee= $this->findMentee();
+        //dd($mentee);
         return view('front.dashboard.dashboard', compact('blogCount', 'mentor', 'mentee', 'commentCount'));
     }
     public function myBlogs()
     {
+
         $blogs= InfoBlogs::where('user_id', auth()->user()->id)->get();
         $deleteTitle = 'İçeriği Sil!';
         $deleteText = "İçeriği silmek istediğinize emin misiniz?";
         confirmDelete($deleteTitle, $deleteText);
-        return view('front.dashboard.myblogs', compact('blogs'));
+        $mentee= $this->findMentee();
+        return view('front.dashboard.myblogs', compact('blogs', 'mentee'));
     }
     public function addBlog()
     {
-        return view('front.dashboard.addblog');
+        $mentee= $this->findMentee();
+        return view('front.dashboard.addblog', compact('mentee'));
     }
     public function profilesettings()
     {
         $user = User::find(auth()->user()->id);
         $userInfo=UserInfo::where('user_id', auth()->user()->id)->first();
         //dd($userInfo);
-        return view('front.dashboard.profilesettings', compact('user', 'userInfo'));
+        $mentee= $this->findMentee();
+        return view('front.dashboard.profilesettings', compact('user', 'userInfo', 'mentee'));
     }
     public function updateProfile(Request $request)
     {
@@ -69,26 +68,32 @@ class DashboardController extends Controller
         if($request->phone)
         {
             $userInfo->phone=$request->phone;
+            $userInfo->save();
         }
         if($request->address)
         {
             $userInfo->address=$request->address;
+            $userInfo->save();
         }
         if($request->birthday)
         {
             $userInfo->birthday=$request->birthday;
+            $userInfo->save();
         }
         if($request->city)
         {
             $userInfo->city=$request->city;
+            $userInfo->save();
         }
         if($request->state)
         {
             $userInfo->state=$request->state;
+            $userInfo->save();
         }
         if($request->about)
         {
             $userInfo->about=$request->about;
+            $userInfo->save();
         }
         if($request->mail)
         {
@@ -123,7 +128,7 @@ class DashboardController extends Controller
             }
         }
         $user->save();
-        $userInfo->save();
+
 
         Alert::success('Başarılı', 'Profil başarıyla güncellendi.');
         return redirect('profilesettings');
@@ -168,9 +173,10 @@ class DashboardController extends Controller
         }
         public function editBlog($id)
         {
+            $mentee= $this->findMentee();
             $blog = InfoBlogs::find($id);
             $docs = InfoDocs::where('info_blogs_id', $id)->get();
-            return view('front.dashboard.editblog', compact('blog', 'docs'));
+            return view('front.dashboard.editblog', compact('blog', 'docs','mentee'));
         }
         public function updateBlog(Request $request)
         {
@@ -214,5 +220,21 @@ class DashboardController extends Controller
             $blog->delete();
             Alert::success('Success', 'Blog has been deleted successfully');
             return redirect('myblogs');
+        }
+        function findMentee()
+        {
+            $userCollection = User::where('id', auth()->user()->id)
+                ->with('mentor', 'mentor.mentee')
+                ->get();
+            $mentor= $userCollection[0];
+            //dd($mentor->mentor->first());
+            if(!is_null($mentor->mentor->first())){
+                //dd($mentor->mentor->first()->mentee);
+                return $mentor->mentor->first()->mentee;
+            }
+            else
+            {
+                return null;
+            }
         }
     }
