@@ -11,8 +11,7 @@
                 <div class="account-box">
                     <div class="login-right">
                         <div class="login-header">
-                            <h3>Login <span>Mentoring</span></h3>
-                            <p class="text-muted">Access to our dashboard</p>
+                            <h3>Ementor <span>Giriş</span></h3>
                         </div>
                         @if($errors->any())
                             @foreach($errors->all() as $error)
@@ -24,21 +23,21 @@
                         <form action="{{route('login')}}" method="POST">
                             @csrf
                             <div class="form-group">
-                                <label class="form-control-label">Email Address</label>
+                                <label class="form-control-label">Email Adres</label>
                                 <input type="email" name="email" class="form-control">
                             </div>
                             <div class="form-group">
-                                <label class="form-control-label">Password</label>
+                                <label class="form-control-label">Şifre</label>
                                 <div class="pass-group">
                                     <input type="password" name="password" class="form-control pass-input">
                                     <span class="fas fa-eye toggle-password"></span>
                                 </div>
                             </div>
                             <div class="text-end">
-                                <a class="forgot-link" href="forgot-password.html">Forgot Password ?</a>
+                                <a class="forgot-link" href="#">Şifrenizi mi Unuttunuz ?</a>
                             </div>
-                            <button class="btn btn-primary login-btn" type="submit">Login</button>
-                            <div class="text-center dont-have">Don’t have an account? <a href="{{route('register')}}">Register</a></div>
+                            <button class="btn btn-primary login-btn" type="submit">Giriş Yap</button>
+                            <div class="text-center dont-have">Henüz hesabınız yok mu? <a href="{{route('register')}}">Kayıt Olun</a></div>
                         </form>
                     </div>
                 </div>

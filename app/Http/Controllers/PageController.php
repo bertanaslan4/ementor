@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AnnoUser;
 use App\Models\Faqs;
 use App\Models\InfoBlogs;
 use App\Models\Menu;
@@ -15,6 +16,8 @@ class PageController extends Controller
 
         $blogs = InfoBlogs::with('user')->orderBy('id','desc')->limit(3)->get();
         $faqs = Faqs::all()->take(6);
+
+
         //dd($blogs);
         return view('front.pages.home',compact('blogs','faqs'));
     }

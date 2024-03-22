@@ -51,13 +51,43 @@
 
 
                     <li class="login-link">
-                        <a href="{{route('login')}}">Login / Signup</a>
+                        <a href="{{route('login')}}">Giriş Yap</a>
                     </li>
                 </ul>
             </div>
             @if(auth()->check())
                 <ul class="nav header-navbar-rht" style="margin-left: 0px!important;">
 
+                    @if(session('anno')!=null)
+                        <li class="nav-item dropdown has-arrow logged-item">
+                            <a href="{{route('anno')}}">
+                                <div class="rounded-circle">
+                                    <i class="fa fa-bell" style="font-size: 24px"></i>
+                                </div>
+
+                                <div
+                                    class="badge badge-danger badge-pill fill-red rounded-pill"
+                                >
+                                    1
+                                </div>
+                            </a>
+                        </li>
+                    @endif
+                    @if(auth()->user()->messenger_color == 1)
+                        <li class="nav-item dropdown has-arrow logged-item">
+                            <a>
+                                <div class="rounded-circle">
+                                    <i class="fa fa-comment" style="font-size: 24px"></i>
+                                </div>
+
+                                <div
+                                    class="badge badge-danger badge-pill fill-red rounded-pill"
+                                >
+                                    1
+                                </div>
+                            </a>
+                        </li>
+                    @endif
                     <!-- User Menu -->
                     <li class="nav-item dropdown has-arrow logged-item">
                         <a href="#" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
@@ -90,9 +120,11 @@
                             </div>
                             @if(auth()->user()->role == 1)
                                 <a class="dropdown-item" href="{{route('dashboard')}}">Dashboard</a>
+                                <a class="dropdown-item" href="{{route('calendar')}}">Takvim</a>
                                 @else
                                 <a class="dropdown-item" href="{{route('profile',auth()->user()->id)}}">Profilim</a>
                                     @if(session('mentor')!=null)
+                                    <a class="dropdown-item" href="{{route('calendar')}}">Takvim</a>
                                         <a class="dropdown-item" href="{{route('chat',session('mentor'))}}">Mesajlar</a>
                                     @endif
 
@@ -111,10 +143,10 @@
             @else
                 <ul class="nav header-navbar-rht header-navbar-rht-eight">
                     <li class="nav-item">
-                        <a class="nav-link btn btn-register" href="{{route('register')}}"><i class="fas fa-sign-in-alt"></i> Sign up</a>
+                        <a class="nav-link btn btn-register" href="{{route('register')}}"><i class="fas fa-sign-in-alt"></i> Kayıt Ol</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link btn btn-login" href="{{route('login')}}"><i class="fas fa-lock"></i> Sign in</a>
+                        <a class="nav-link btn btn-login" href="{{route('login')}}"><i class="fas fa-lock"></i> Giriş Yap</a>
                     </li>
                 </ul>
             @endif

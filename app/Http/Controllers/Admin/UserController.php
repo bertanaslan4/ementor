@@ -38,7 +38,7 @@ class UserController extends Controller
     public function detail($id)
     {
         $user = User::find($id)->with('mentor.mentee', 'mentee.mentor','userInfo')->first();
-        //dd($user->mentor->first()->mentee);
+        //dd($user);
         return view('admin.pages.profile', compact('user'));
     }
     public function approve($id)
@@ -56,4 +56,5 @@ class UserController extends Controller
         Alert::success('Başarılı', 'Kullanıcı Başarıyla Silindi');
         return redirect()->route('admin.home');
     }
+
 }

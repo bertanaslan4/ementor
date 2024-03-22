@@ -100,6 +100,70 @@ Version      : 1.0
 	url(../fonts/MaterialIcons-Regular.woff) format('woff'),
 	url(../fonts/MaterialIcons-Regular.ttf) format('truetype');
 }
+.calendar {
+    font-family: Arial, sans-serif;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.calendar-header button {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.calendar-body {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+}
+
+.calendar-body .day {
+    border: 1px solid #ccc;
+    text-align: center;
+}
+
+.day .day-number{
+    padding-top: 25px;
+    padding-bottom: 10px;
+    background-color: #000000;
+    color: white;
+    text-align: center;
+}
+.day .past-day{
+    background-color: #4e4be5;!important;
+}
+.meeting {
+    padding: 5px!important;
+    margin-top: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    background-color: darkorange;
+    color: white;
+}
+.meeting-1{
+    padding: 15px;
+    margin-top: 5px;
+    font-size: 14px;
+    cursor: pointer;
+}
+.calendar-body .today {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.calendar-body .selected {
+    background-color: #28a745;
+    color: #fff;
+}
+
 .material-icons {
 	font-family: 'Material Icons';
 	font-weight: normal;

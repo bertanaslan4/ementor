@@ -112,12 +112,20 @@
                                                         <p class="col-sm-2 text-muted mb-0 mb-sm-3">Email </p>
                                                         <p class="col-sm-10">{{$user->mentor->first()->mentee->email}}</p>
                                                     </div>
+                                                    <div class="row">
+                                                        <div class="col-8 mx-auto">
+                                                            <a href="{{route('admin.relations.destroy',$user->id)}}" style="width: 100%" class="btn btn-sm bg-danger-light me-2 btn-match" >
+                                                                <i class="fe fe-ban"></i> Eşleşmeyi Kaldır
+                                                            </a>
+                                                        </div>
+                                                    </div>
 
                                                 </div>
                                             </div>
 
 
                                         </div>
+
 
 
                                     </div>

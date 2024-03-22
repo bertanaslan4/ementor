@@ -42,21 +42,21 @@
                                                        <i class="fas fa-star"></i>
                                                    </div>
                                                </div>
-                                               <p class="recommended"><i class="far fa-thumbs-up"></i> I recommend the consectetur</p>
+{{--                                               <p class="recommended"><i class="far fa-thumbs-up"></i> I recommend the consectetur</p>--}}
                                                  <hr>
                                                <div class="comment-reply">
                                                    <a class="comment-btn toggle-answer" data-id="{{$faq->id}}"  href="#">
                                                        <i class="fas fa-reply"></i> Cevabı gör
                                                    </a>
-                                                   <p class="recommend-btn">
-                                                       <span>Beğendiniz mi?</span>
-                                                       <a href="#" class="like-btn">
-                                                           <i class="far fa-thumbs-up"></i> Evet
-                                                       </a>
-                                                       <a href="#" class="dislike-btn">
-                                                           <i class="far fa-thumbs-down"></i> Hayır
-                                                       </a>
-                                                   </p>
+{{--                                                   <p class="recommend-btn">--}}
+{{--                                                       <span>Beğendiniz mi?</span>--}}
+{{--                                                       <a href="#" class="like-btn">--}}
+{{--                                                           <i class="far fa-thumbs-up"></i> Evet--}}
+{{--                                                       </a>--}}
+{{--                                                       <a href="#" class="dislike-btn">--}}
+{{--                                                           <i class="far fa-thumbs-down"></i> Hayır--}}
+{{--                                                       </a>--}}
+{{--                                                   </p>--}}
                                                </div>
                                            </div>
                                        </div>

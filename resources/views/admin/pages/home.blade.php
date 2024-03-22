@@ -135,7 +135,7 @@
                                                     <a  href="{{route('admin.users.detail',$mentor->id)}}" class="btn btn-sm bg-primary-light me-2">
                                                         <i class="fe fe-eye"></i> Detay
                                                     </a>
-                                                    <a class="btn btn-sm bg-warning-light me-2 btn-match" data-user-id="{{$mentor->id}}" data-match-name="@if(!$mentor->mentor->isEmpty())  {{$mentor->mentor->first()->mentee->name}} @endif">
+                                                    <a class="btn btn-sm bg-warning-light me-2 btn-match" data-user-id="{{$mentor->id}}" data-match-name="@if(!$mentor->mentor->isEmpty())  {{$mentor->mentor->first()->mentee->name}} {{$mentor->mentor->first()->mentee->surname}} @endif">
                                                         <i class="fe fe-eye"></i> Eşleşme
                                                     </a>
 
@@ -219,8 +219,8 @@
                                         <tr>
                                             <td>
                                                 <h2 class="table-avatar">
-                                                    <a href="profile.html" class="avatar avatar-sm me-2"><img class="avatar-img rounded-circle" src="assets/img/user/user.jpg" alt="User Image"></a>
-                                                    <a href="profile.html">{{$users->name}} </a>
+                                                    <a href="href="{{route('admin.users.detail',$mentor->id)}}" " class="avatar avatar-sm me-2"><img class="avatar-img rounded-circle" src="assets/img/user/user.jpg" alt="User Image"></a>
+                                                    <a href="href="{{route('admin.users.detail',$mentor->id)}}" ">{{$users->name}} </a>
                                                 </h2>
                                             </td>
                                             <td>{{$users->email}}</td>

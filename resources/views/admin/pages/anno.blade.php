@@ -27,8 +27,8 @@
                         <div class="row align-items-center">
                             <div class="col-lg-12 col-md-12">
                                 <div class="invoices-settings-btn invoices-settings-btn-one">
-                                    <a href="{{route('admin.menu.create')}}" class="btn">
-                                        <i data-feather="plus-circle"></i> Yeni İçerik Ekle
+                                    <a href="{{route('admin.anno.create')}}" class="btn">
+                                        <i data-feather="plus-circle"></i> Yeni Duyuru Ekle
                                     </a>
                                 </div>
                             </div>
@@ -47,20 +47,18 @@
                                     <tr>
                                         <th>Başlık</th>
 
-
                                         <th>Tarih</th>
                                         <th class="text-end">İşlem</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach($menus as $menu)
+                                    @foreach($annos as $anno)
                                         <tr>
 
-                                            <td class="text-primary">{{$menu->name}}</td>
-
-                                            <td>{{$menu->created_at->format('d-m-Y')}}</td>
+                                            <td class="text-primary">{{$anno->title}}</td>
+                                            <td>{{$anno->created_at->format('d-m-Y')}}</td>
                                             <td class="text-end">
-                                                <a href="{{route('admin.menu.content',$menu->id)}}" class="btn btn-sm btn-white text-success me-2"><i class="far fa-edit me-1"></i> Detay</a>
+                                                <a href="" class="btn btn-sm btn-white text-success me-2"><i class="far fa-edit me-1"></i> Detay</a>
 
                                             </td>
                                         </tr>

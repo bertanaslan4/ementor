@@ -5,7 +5,7 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
-    <title>Mentoring</title>
+    <title>Ementor</title>
     <!-- Datetimepicker CSS -->
 
     @include('front.layout.partials.css')
@@ -31,7 +31,7 @@
                 <div class="col-md-12 col-12">
                     <nav aria-label="breadcrumb" class="page-breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{route('home')}}">Home</a></li>
+                            <li class="breadcrumb-item"><a href="{{route('home')}}">Anasayfa</a></li>
                         </ol>
                     </nav>
                     <h2 class="breadcrumb-title">Dashboard</h2>

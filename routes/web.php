@@ -15,6 +15,10 @@ use App\Http\Controllers\Admin\MenuController as AdminMenuController;
 use App\Http\Controllers\CommentsController;
 use App\Http\Controllers\MessagesController;
 use App\Http\Controllers\UserInfoController;
+use App\Http\Controllers\CalendarController;
+use App\Http\Controllers\AnnoController;
+use App\Http\Controllers\Admin\SettingsController;
+use App\Http\Controllers\Admin\CalendarController as AdminCalendarController;
 
 
 /*
@@ -57,6 +61,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile/{id}',[UserInfoController::class,'index'])->name('profile');
     Route::get('/profileset',[UserInfoController::class,'profile'])->name('profileset');
     Route::post('/profileset',[UserInfoController::class,'updateProfile'])->name('profileset.update');
+    Route::get('/calendar',[CalendarController::class,'index'])->name('calendar');
+    Route::post('/calendar',[CalendarController::class,'store'])->name('calendar.store');
+    Route::delete('/deleteCalendar/{id}',[CalendarController::class,'delete'])->name('calendar.delete');
+    Route::get('/anno',[AnnoController::class,'index'])->name('anno');
 });
 
 
@@ -84,7 +92,7 @@ Route::prefix('admin')->middleware('redirect.if.not.admin')->group(function () {
     Route::get('/users/approve/{id}', [UserController::class, 'approve'])->name('admin.users.approve');
     Route::get('/relations', [RelationsController::class, 'index'])->name('admin.relations');
     Route::post('/relations', [RelationsController::class, 'create'])->name('admin.relations.create');
-    //Route::delete('/relations/destroy/{id}', [RelationsController::class, 'destroy'])->name('admin.relations.destroy');
+    Route::delete('/relations/destroy/{id}', [RelationsController::class, 'destroy'])->name('admin.relations.destroy');
     Route::get('/faqs', [AdminFaqsController::class, 'list'])->name('admin.faqs');
     Route::get('/faqs/create', [AdminFaqsController::class, 'create'])->name('admin.faqs.create');
     Route::post('/faqs/store', [AdminFaqsController::class, 'store'])->name('admin.faqs.store');
@@ -99,6 +107,16 @@ Route::prefix('admin')->middleware('redirect.if.not.admin')->group(function () {
     Route::get('/menu/edit/{id}', [AdminMenuController::class, 'edit'])->name('admin.menu.edit');
     Route::post('/menu/update', [AdminMenuController::class, 'update'])->name('admin.menu.update');
     Route::delete('/menu/destroy/{id}', [AdminMenuController::class, 'destroy'])->name('admin.menu.destroy');
+    Route::get('/anno', [AdminController::class, 'anno'])->name('admin.anno.list');
+    Route::get('/anno/create', [AdminController::class, 'annoCreate'])->name('admin.anno.create');
+    Route::post('/anno', [AdminController::class, 'annoStore'])->name('admin.anno.store');
+    Route::get('/settings',[SettingsController::class,'index'])->name('admin.settings');
+    Route::get('/calendar',[AdminCalendarController::class,'index'])->name('admin.calendar');
+    Route::post('/settings/logo',[SettingsController::class,'logo'])->name('admin.settings.logo');
+    Route::post('/settings/banner',[SettingsController::class,'banner'])->name('admin.settings.banner');
+    Route::post('/settings/section1',[SettingsController::class,'section1'])->name('admin.settings.section1');
+    Route::post('/settings/section4',[SettingsController::class,'section4'])->name('admin.settings.section4');
+
 
 });
 

@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AnnoUser;
 use App\Models\User;
 use Illuminate\Http\Request;
+use function PHPUnit\Framework\isNull;
 
 class LoginController extends Controller
 {
@@ -21,13 +23,48 @@ class LoginController extends Controller
         if ($user && $user->email_verified_at && $user->status == 1 && auth()->attempt(['email' => $request->email, 'password' => $request->password])) {
             if(auth()->user()->role == 2){
                 $mentor  = User::where('id',auth()->user()->id)->with('mentee')->first();
-                //dd($mentor);
+                $annoCount=0;
+                $annos = AnnoUser::where('user_id',auth()->user()->id)->get();
+                foreach ($annos as $anno)
+                {
+                    if($anno->status == 0)
+                    {
+                        $annoCount++;
+                    }
+                }
+                if($annoCount > 0)
+                {
+                    session(['anno' =>$annoCount]);
+                }
+                else
+                {
+                    session(['anno' => null]);
+                }
                 if(!is_null($mentor->mentee->first())){
                     session(['mentor' => $mentor->mentee->first()->mentor_id]);
                 }
                 else
                 {
                     session(['mentor' => null]);
+                }
+            }
+            else{
+                $annoCount=0;
+                $annos = AnnoUser::where('user_id',auth()->user()->id)->get();
+                foreach ($annos as $anno)
+                {
+                    if($anno->status == 0)
+                    {
+                        $annoCount++;
+                    }
+                }
+                if($annoCount > 0)
+                {
+                    session(['anno' =>$annoCount]);
+                }
+                else
+                {
+                    session(['anno' => null]);
                 }
             }
 

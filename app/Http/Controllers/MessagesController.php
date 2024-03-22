@@ -17,14 +17,21 @@ class MessagesController extends Controller
         $mentor= $userCollection[0];
         $mentee= $mentor->mentor->first()->mentee;
         $mentor = null;
+        $user= User::where('id', auth()->user()->id)->get()->first();
+        $user->messenger_color = null;
+        $user->save();
         //dd($mentee);
         return view('front.dashboard.messages', compact('id','messengerColor','dark_mode','mentee','mentor'));
     }
     public function chat($id)
     {
+        $user= User::where('id', auth()->user()->id)->get()->first();
+        $user->messenger_color = null;
+        $user->save();
         $messengerColor="#2180f3";
         $dark_mode="light";
         $mentor = User::where('id', $id)->get()->first();
+
         return view('front.pages.chat',compact('id','messengerColor','dark_mode','mentor'));
 
     }

@@ -5,28 +5,28 @@
         <div class="container">
             <div class="banner-wrapper-eight m-auto text-center">
                 <div class="banner-header aos" data-aos="fade-up">
-                    <h1>Search Teacher in <span>Mentoring</span> Appointment</h1>
-                    <p>Discover the best Mentors & institutions the city nearest to you.</p>
+                    <h1>{{$settings->banner_title}}</h1>
+                    <p>{{$settings->banner_subtitle}}</p>
                 </div>
 
                 <!-- Search -->
                 <div class="search-box-eight aos" data-aos="fade-up">
-                    <form action="https://mentoring.dreamstechnologies.com/html/template/search.html">
+                    <form action="#">
                         <div class="form-search">
                             <div class="form-inner">
                                 <div class="form-group search-location-eight">
                                     <i class="material-icons">my_location</i>
                                     <select class="form-control select">
-                                        <option>Location</option>
-                                        <option>Japan</option>
-                                        <option>France</option>
+                                        <option>Kategori Seçin</option>
+                                        <option>İçerik</option>
+                                        <option>Mentor</option>
                                     </select>
                                 </div>
                                 <div class="form-group search-info-eight">
                                     <i class="material-icons">location_city</i>
-                                    <input type="text" class="form-control" placeholder="Search School, Online educational centers, etc">
+                                    <input type="text" class="form-control" placeholder="Arama Yapın">
                                 </div>
-                                <button type="submit" class="btn search-btn-eight mt-0">Search <i class="fas fa-long-arrow-alt-right"></i></button>
+                                <button type="submit" class="btn search-btn-eight mt-0">Ara <i class="fas fa-long-arrow-alt-right"></i></button>
                             </div>
                         </div>
                     </form>
@@ -42,9 +42,9 @@
     <section class="section how-it-works-section">
         <div class="container">
             <div class="section-header-eight text-center aos" data-aos="fade-up">
-                <span>Mentoring Flow</span>
-                <h2>How does it works ?</h2>
-                <p class="sub-title">Are you looking to join online institutions? Now it's very simple, Sign up with mentoring</p>
+                <span>{{$settings->section_title}}</span>
+                <h2>{{$settings->section_subtitle}}</h2>
+
                 <div class="sec-dots">
                     <span></span>
                     <span></span>
@@ -59,10 +59,10 @@
                                 <span class="circle bg-green"><i class="fas fa-sign-in-alt"></i></span>
                             </div>
                             <div class="feature-cont">
-                                <div class="feature-text-eight">Sign up</div>
+                                <div class="feature-text-eight">{{$settings->section1_title}}</div>
                             </div>
                         </div>
-                        <p>Are you looking to join online Learning? Now it's very simple, Now Sign up</p>
+                        <p>{{$settings->section1_subtitle}}</p>
                         <span class="text-green">01</span>
                     </div>
                 </div>
@@ -73,10 +73,10 @@
                                 <span class="circle bg-blue"><i class="material-icons">accessibility</i></span>
                             </div>
                             <div class="feature-cont">
-                                <div class="feature-text-eight">Collaborate</div>
+                                <div class="feature-text-eight">{{$settings->section2_title}}</div>
                             </div>
                         </div>
-                        <p>Collaborate on your own timing, by scheduling with mentor booking</p>
+                        <p>{{$settings->section2_subtitle}}</p>
                         <span class="text-blue">02</span>
                     </div>
                 </div>
@@ -87,10 +87,10 @@
                                 <span class="circle bg-orange"><i class="material-icons">event_seat</i></span>
                             </div>
                             <div class="feature-cont">
-                                <div class="feature-text-eight">Improve & Get Back</div>
+                                <div class="feature-text-eight">{{$settings->section3_title}}</div>
                             </div>
                         </div>
-                        <p>you can gather different skill set, and you can become mentor too</p>
+                        <p>{{$settings->section3_subtitle}}</p>
                         <span class="text-orange">03</span>
                     </div>
                 </div>
@@ -153,8 +153,8 @@
                             <i class="fas fa-street-view"></i>
                         </div>
                         <div class="statistics-content-eight">
-                            <span>500+</span>
-                            <h3>Happy Clients</h3>
+                            <span>{{$settings->section4_title}}</span>
+                            <h3>{{$settings->section4_subtitle}}</h3>
                         </div>
                     </div>
                 </div>
@@ -164,8 +164,8 @@
                             <i class="fas fa-history"></i>
                         </div>
                         <div class="statistics-content-eight">
-                            <span>120+</span>
-                            <h3>Online Appointments</h3>
+                            <span>{{$settings->section5_title}}</span>
+                            <h3>{{$settings->section5_subtitle}}</h3>
                         </div>
                     </div>
                 </div>
@@ -175,8 +175,8 @@
                             <i class="fas fa-user-check"></i>
                         </div>
                         <div class="statistics-content-eight">
-                            <span>100%</span>
-                            <h3>Job Satisfaction</h3>
+                            <span>{{$settings->section6_title}}</span>
+                            <h3>{{$settings->section6_subtitle}}</h3>
                         </div>
                     </div>
                 </div>
@@ -192,9 +192,9 @@
 
                 <!-- Section Header -->
                 <div class="section-header-eight text-center aos" data-aos="fade-up">
-                    <span>LATEST</span>
-                    <h2>Blogs & News</h2>
-                    <p class="sub-title">Are you looking to join online institutions? Now it's very simple, Sign up with mentoring</p>
+                    <span>En Yeni</span>
+                    <h2>İçerikler</h2>
+
                     <div class="sec-dots">
                         <span></span>
                         <span></span>
@@ -217,11 +217,11 @@
                                     <ul class="meta-item-eight">
                                         <li>
                                             <div class="post-author-eight">
-                                                <a href="profile.html"><span>{{$blog->user->name}}</span></a>
+                                                <a href="{{route('profile',$blog->user_id)}}"><span>{{$blog->user->name}} {{$blog->user->surname}}</span></a>
                                             </div>
                                         </li>
                                     </ul>
-                                    <h3 class="blog-title-eight"><a href="blog-details.html">{{$blog->title}}</a></h3>
+                                    <h3 class="blog-title-eight"><a href="{{route('blogdetail',$blog->id)}}">{{$blog->title}}</a></h3>
                                     <p>{{$blog->short_text}}</p>
                                     <a href="{{route('blogdetail',$blog->id)}}" class="read">Daha Fazlası...</a>
                                 </div>
@@ -233,7 +233,7 @@
 
                 </div>
                 <div class="view-all text-center aos" data-aos="fade-up">
-                    <a href="blog-list.html" class="btn btn-primary btn-view">View All</a>
+                    <a href="{{route('infoblog')}}" class="btn btn-primary btn-view">Tümünü Gör</a>
                 </div>
             </div>
         </section>

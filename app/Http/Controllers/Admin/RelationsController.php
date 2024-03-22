@@ -36,4 +36,10 @@ class RelationsController extends Controller
          return redirect()->back();
 
    }
+    public function destroy($id)
+    {
+         Relations::where('mentor_id', $id)->orWhere('mentee_id', $id)->delete();
+         Alert::success('Başarılı', 'Mentor-Mentee ilişkisi başarıyla silindi');
+         return redirect()->route('admin.relations');
+    }
 }

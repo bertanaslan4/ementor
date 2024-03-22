@@ -23,29 +23,29 @@
                                     </div>
                                     <div class="upload-img">
                                         <div class="change-photo-btn">
-                                            <span><i class="fa fa-upload"></i> Upload Photo</span>
+                                            <span><i class="fa fa-upload"></i> Fotoğraf Yükle</span>
                                             <input type="file" name="photo" class="upload">
                                         </div>
-                                        <small class="form-text text-muted">Allowed JPG, GIF or PNG. Max size of 2MB</small>
+                                        <small class="form-text text-muted">Format JPG, GIF veya PNG. İzin verilen boyut 2MB</small>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-12 col-md-6">
                             <div class="form-group">
-                                <label>First Name</label>
+                                <label>İsim</label>
                                 <input type="text" name="name" class="form-control" value="{{$user->name}}">
                             </div>
                         </div>
                         <div class="col-12 col-md-6">
                             <div class="form-group">
-                                <label>Last Name</label>
+                                <label>Soyisim</label>
                                 <input type="text" name="surname" class="form-control" value="{{$user->surname}}">
                             </div>
                         </div>
                         <div class="col-12 col-md-12">
                             <div class="form-group">
-                                <label>Date of Birth</label>
+                                <label>Doğum Tarihi</label>
 
                                     <input
                                         type="date"
@@ -66,25 +66,25 @@
                         </div>
                         <div class="col-12 col-md-6">
                             <div class="form-group">
-                                <label>Mobile</label>
+                                <label>Telefon</label>
                                 <input type="text" name="phone" value="{{ $userInfo->phone ?? '' }}" class="form-control">
                             </div>
                         </div>
                         <div class="col-12">
                             <div class="form-group">
-                                <label>Address</label>
+                                <label>Adres</label>
                                 <input type="text" name="address" class="form-control" value="{{ $userInfo->address ?? '' }}">
                             </div>
                         </div>
                         <div class="col-12 col-md-6">
                             <div class="form-group">
-                                <label>City</label>
+                                <label>İl</label>
                                 <input type="text" name="city" class="form-control" value="{{ $userInfo->city ?? '' }}">
                             </div>
                         </div>
                         <div class="col-12 col-md-6">
                             <div class="form-group">
-                                <label>State</label>
+                                <label>İlçe</label>
                                 <input type="text"  name="state" class="form-control" value="{{ $userInfo->state ?? '' }}">
                             </div>
                         </div>
@@ -98,7 +98,7 @@
 
                     </div>
                     <div class="submit-section">
-                        <button type="submit" class="btn btn-primary submit-btn">Save Changes</button>
+                        <button type="submit" class="btn btn-primary submit-btn">Kaydet</button>
                     </div>
                 </form>
                 <!-- /Profile Settings Form -->

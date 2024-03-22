@@ -21,6 +21,12 @@
                 <li>
                     <a href="{{route('admin.relations')}}"><span>Eşleşmeler</span></a>
                 </li>
+                <li>
+                    <a href="{{route('admin.settings')}}"><span>Site Ayarları</span></a>
+                </li>
+{{--                <li>--}}
+{{--                    <a href="{{route('admin.calendar')}}"><span>Takvim</span></a>--}}
+{{--                </li>--}}
 
 
                 <li class="menu-title">
@@ -39,6 +45,13 @@
                     <ul style="display: none;">
                         <li><a href="{{route('admin.menu.list')}}"> Liste </a></li>
                         <li><a href="{{route('admin.menu.create')}}"> İçerik Ekle </a></li>
+                    </ul>
+                </li>
+                <li class="submenu">
+                    <a href="#"><span>Duyurular</span> <span class="menu-arrow"></span></a>
+                    <ul style="display: none;">
+                        <li><a href="{{route('admin.anno.list')}}"> Liste </a></li>
+                        <li><a href="{{route('admin.anno.store')}}"> Duyuru Ekle </a></li>
                     </ul>
                 </li>
 {{--                <li class="menu-title">--}}

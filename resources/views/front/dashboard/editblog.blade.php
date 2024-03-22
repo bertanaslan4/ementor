@@ -7,7 +7,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h3 class="pb-3">Add Blog</h3>
+                        <h3 class="pb-3">Blog Düzenleme</h3>
 
                         <form action="{{route('updateBlog')}}" method="post" enctype="multipart/form-data">
                             @csrf
@@ -25,7 +25,7 @@
                                                         <span><i class="fa fa-upload"></i> Upload Photo</span>
                                                         <input type="file" name="photo" class="upload">
                                                     </div>
-                                                    <small class="form-text text-muted">Allowed JPG, GIF or PNG. Max size of 2MB</small>
+                                                    <small class="form-text text-muted">Format JPG, GIF veya PNG. İzin verilen boyut 2MB</small>
                                                 </div>
                                             </div>
                                         </div>
@@ -68,7 +68,7 @@
                             </div>
 
                             <div class="service-fields mb-3">
-                                <h4 class="heading-2">Blog Images </h4>
+                                <h4 class="heading-2">Blog Dökümanı </h4>
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <div class="service-upload">
@@ -104,7 +104,7 @@
                                 </div>
                             </div>
                             <div class="submit-section">
-                                <button class="btn btn-primary submit-btn" type="submit" name="form_submit" value="submit">Submit</button>
+                                <button class="btn btn-primary submit-btn" type="submit" name="form_submit" value="submit">Düzenle</button>
                             </div>
                         </form>
 

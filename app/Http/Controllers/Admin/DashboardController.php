@@ -3,10 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Anno;
+use App\Models\AnnoUser;
 use App\Models\Relations;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class DashboardController extends Controller
 {
@@ -58,5 +61,46 @@ class DashboardController extends Controller
     {
         Auth::guard('admin')->logout();
         return redirect()->route('admin.login');
+    }
+    public function anno(){
+        $annos = Anno::all();
+        return view('admin.pages.anno',compact('annos'));
+    }
+    public function annoCreate(){
+        return view('admin.pages.annoCreate');
+    }
+    public function annoStore(Request $request)
+    {
+       $title = $request->input('title');
+       $short_desc = $request->input('short_desc');
+         $content = $request->input('desc');
+            $anno = Anno::create([
+                'title' => $title,
+                'short_description' => $short_desc,
+                'description' => $content,
+            ]);
+
+        if($request->mentee == 'on' ){
+            $mentees = User::where('role', 2)->get();
+            foreach ($mentees as $mentee){
+                AnnoUser::create([
+                    'user_id' => $mentee->id,
+                    'anno_id' => $anno->id,
+                ]);
+            }
+
+        }
+        if($request->mentor == 'on' ){
+            $mentors = User::where('role', 1)->get();
+            foreach ($mentors as $mentor){
+                AnnoUser::create([
+                    'user_id' => $mentor->id,
+                    'anno_id' => $anno->id,
+                ]);
+            }
+        }
+        Alert::success('Başarılı', 'Duyuru başarıyla eklendi');
+        return redirect()->route('admin.anno.list');
+
     }
 }
