@@ -3,131 +3,62 @@
     <!-- -->
 @endsection
 @section('content')
-    <div class="container">
+    <!-- Page Wrapper -->
+    <div class="page-wrapper">
+        <div class="content container-fluid">
 
-        <div class="row">
-            <div class="col-8">
-                <div class="calendar">
-                    <div class="calendar-header">
-                        <button id="prevMonth">&lt;</button>
-                        <h2 id="currentMonthYear"></h2>
-                        <button id="nextMonth">&gt;</button>
+            <!-- Page Header -->
+            <div class="page-header">
+                <div class="row align-items-center">
+                    <div class="col">
+                        <h3 class="page-title">Menü Listesi</h3>
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{{route('admin.home')}}">Dashboard</a></li>
+                        </ul>
                     </div>
-                    <div class="calendar-body" id="calendarBody"></div>
                 </div>
+            </div>
 
-                <div id="meetingModal" class="modal">
-                    <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title">Randevu Detayı</h5>
-                                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                                    <span id="span2" aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <h2 id="title"></h2>
-                                <p id="meetingDate"></p>
-                                <p id="meetingTime"></p>
-                                <p id="status"></p>
+            <div class="row">
+                <div class="col-12">
+                    <div class="calendar">
+                        <div class="calendar-header">
+                            <button id="prevMonth">&lt;</button>
+                            <h2 id="currentMonthYear"></h2>
+                            <button id="nextMonth">&gt;</button>
+                        </div>
+                        <div class="calendar-body" id="calendarBody"></div>
+                    </div>
+
+                    <div id="meetingModal" class="modal">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Randevu Detayı</h5>
+                                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                        <span id="span2" aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <h2 id="title"></h2>
+                                    <p id="meetingDate"></p>
+                                    <p id="meetingTime"></p>
+                                    <p id="status"></p>
+                                    <p id="sender"></p>
+                                    <p id="receiver"></p>
+                                </div>
                             </div>
                         </div>
+
                     </div>
+
 
                 </div>
 
-
-            </div>
-            <div class="col-4">
-                <!-- Latest Posts -->
-                <div class="card post-widget" style="margin-top: 70px;">
-                    <div class="card-header">
-                        <h4 class="card-title">Talep Edilen Randevular</h4>
-                    </div>
-                    <div class="card-body">
-                        <ul class="latest-posts">
-                            @if($meetingsTalep->count() > 0)
-                                @foreach($meetingsTalep as $meeting)
-                                    <li>
-
-                                        <div class="row">
-                                            @php
-                                                $backgroundColor = $meeting->status == 0 ? 'orange' : 'limegreen';
-                                            @endphp
-                                            <div class="col-1" style="background-color: {{ $backgroundColor }}">
-                                                <!-- İçerik -->
-                                            </div>
-                                            <div class="col-11">
-                                                <div class="row">
-                                                    <div class="col-9">
-                                                        <h4>
-                                                            {{$meeting->title}}
-                                                        </h4>
-                                                    </div>
-                                                    <div class="col-3">
-                                                        <a href="{{route('calendar.delete',$meeting->id)}}" data-confirm-delete="true" class="btn btn-danger btn-sm">İptal</a>
-                                                    </div>
-                                                </div>
-                                                <p>{{$meeting->meeting_date}} {{$meeting->meeting_time ? substr($meeting->meeting_time, 0, 5) : ''}}</p>
-                                            </div>
-                                        </div>
-
-                                    </li>
-
-                                @endforeach
-                            @else
-                                <p>Randevu Bulunmuyor</p>
-                            @endif
-                        </ul>
-                    </div>
-                </div>
-                <!-- /Latest Posts -->
-                <div class="card post-widget" style="margin-top: 10px;">
-                    <div class="card-header">
-                        <h4 class="card-title">Bekleyen Randevular</h4>
-                    </div>
-                    <div class="card-body">
-                        <ul class="latest-posts">
-                            @if($meetingsWait->count() > 0)
-                                @foreach($meetingsWait as $meeting)
-                                    <li>
-
-                                        <div class="row">
-                                            <div class="col-8">
-                                                <h4>
-                                                    {{$meeting->title}}
-                                                </h4>
-                                                <p>{{$meeting->meeting_date}} {{$meeting->meeting_time ? substr($meeting->meeting_time, 0, 5) : ''}}</p>
-
-                                            </div>
-                                            <div class="col-2">
-                                                <form>
-                                                    <input type="hidden" name="meeting_id" value="{{$meeting->id}}">
-                                                    <button type="submit" style="width: 100%;height: 100%" class="btn btn-success btn-sm"><i class="fa fa-plus"></i></button>
-                                                </form>
-                                            </div>
-                                            <div class="col-2">
-                                                <form>
-                                                    <input type="hidden" name="meeting_id" value="{{$meeting->id}}">
-                                                    <button type="submit" style="width: 100%;height: 100%" class="btn btn-danger btn-sm"><i class="fa fa-ban"></i></button>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </li>
-
-                                @endforeach
-                            @else
-                                <p>Randevu Bulunmuyor</p>
-                            @endif
-                        </ul>
-                    </div>
-                </div>
             </div>
         </div>
-
     </div>
-@endsection
-@section('scripts')
+    <!-- /Page Wrapper -->
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const currentDate = new Date();
@@ -218,7 +149,7 @@
                         meetingDay.classList.add("meeting");
                         meetingDay.textContent = "Randevu Var";
                         meetingDay.addEventListener("click", () =>
-                            openModal2("{{ $meeting->meeting_time }}", "{{ $meeting->meeting_date }}", "{{ $meeting->status }}", meetingTitle));
+                            openModal2("{{ $meeting->meeting_time }}", "{{ $meeting->meeting_date }}", "{{ $meeting->status }}", meetingTitle,"{{$meeting->sender->name}}","{{$meeting->receiver->name}}"));
                     }
                     @endforeach
                 }
@@ -228,53 +159,28 @@
                 modal.style.display = "block";
                 document.getElementById("selectedDate").value = `${year}-${String(month).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
             }
-            function openModal2(time,date,status,title) {
+            function openModal2(time,date,status,title,sender,receiver) {
                 modal2.style.display = "block";
                 document.getElementById("title").textContent = title;
                 document.getElementById("meetingDate").textContent = date;
                 document.getElementById("meetingTime").textContent = time;
+                if(status == 0){
+                    status = 'Beklemede';
+                }else if(status == 1){
+                    status = 'Onaylandı';
+                }
                 document.getElementById("status").textContent = status;
+                document.getElementById("sender").textContent = sender;
+                document.getElementById("receiver").textContent = receiver;
             }
-
-            span.onclick = function () {
-                modal.style.display = "none";
-
-            };
             span2.onclick = function () {
                 modal2.style.display = "none";
             };
 
-            // window.onclick = function (event) {
-            //     if (event.target == modal) {
-            //         modal.style.display = "none";
-            //     }
-            // };
-            // window.onclick = function (event) {
-            //     if (event.target == modal2) {
-            //         modal2.style.display = "none";
-            //     }
-            // };
-
-            {{--requestMeetingBtn.onclick = function () {--}}
-            {{--    const meetingTime = meetingTimeInput.value;--}}
-            {{--    const formData = new FormData();--}}
-            {{--    formData.append("meeting_time", meetingTime);--}}
-
-            {{--    fetch("{{ route('calendar.store') }}", {--}}
-            {{--        method: "POST",--}}
-            {{--        body: formData,--}}
-            {{--    })--}}
-            {{--        .then((response) => response.json())--}}
-            {{--        .then((data) => {--}}
-            {{--            // Handle response data as needed--}}
-            {{--            console.log(data);--}}
-            {{--        })--}}
-            {{--        .catch((error) => console.error("Error:", error));--}}
-
-            {{--    modal.style.display = "none";--}}
-            {{--};--}}
-
             renderCalendar();
         });
     </script>
+@endsection
+@section('scripts')
+
 @endsection

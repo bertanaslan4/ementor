@@ -30,6 +30,9 @@ class UserController extends Controller
     }
     public function waitingUsers()
     {
+        $deleteTitle = 'Kullanıcı Sil!';
+        $deleteText = "Kullanıcıyı silmek istediğinizden emin misiniz?";
+        confirmDelete($deleteTitle, $deleteText);
         $waitedUsers = User::where('status', 0)
             ->orderBy('id', 'asc')
             ->get();
@@ -37,7 +40,7 @@ class UserController extends Controller
     }
     public function detail($id)
     {
-        $user = User::find($id)->with('mentor.mentee', 'mentee.mentor','userInfo')->first();
+        $user = User::where('id',$id)->with('mentor.mentee', 'mentee.mentor','userInfo')->first();
         //dd($user);
         return view('admin.pages.profile', compact('user'));
     }

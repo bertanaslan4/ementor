@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\AnnoUser;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use function PHPUnit\Framework\isNull;
 
 class LoginController extends Controller
@@ -71,16 +72,53 @@ class LoginController extends Controller
 
             return redirect()->route('home');
         }
-        return back()->with('error', 'Invalid email or password');
+        else if($user && $user->email_verified_at == null)
+        {
+            return redirect()->back()->with('error', 'Lütfen emailinizi onaylayınız.');
+        }
+        else if($user && $user->status == 0)
+        {
+            return back()->with('error', 'Hesabınız henüz onaylanmamıştır. Lütfen yönetici ile iletişime geçiniz.');
+        }
+        return redirect()->route('login')->with('error', 'Yanlış email veya şifre girdiniz.');
     }
     public function showRegister()
     {
         return view('front.auth.register');
+    }
+    public function register(Request $request)
+    {
+        $hash = Str::random(32);
+        $user = User::create([
+            'name' => $request->name,
+            'surname' => $request->surname,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+            'role' => $request->role
+        ]);
+        $user->sendEmailVerificationNotification();
+        return redirect()->route('login')->with('success', 'Please check your email to verify your account');
     }
     public function logout()
     {
         auth()->logout();
         return redirect()->route('home');
 
+    }
+    public function verify()
+    {
+        $id=$_GET["id"];
+        $hash=$_GET["hash"];
+        $user = User::where('id', $id)->first();
+        if($user->email_verified_at == null)
+        {
+            $user->email_verified_at = now();
+            $user->save();
+            return  view('auth.verify-email')->with('success', 'Your account has been verified');
+        }
+        else
+        {
+            return redirect()->route('login')->with('error', 'Your account has already been verified');
+        }
     }
 }

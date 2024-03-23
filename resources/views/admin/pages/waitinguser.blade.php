@@ -38,8 +38,8 @@
                                         <tr>
                                             <td>
                                                 <h2 class="table-avatar">
-                                                    <a href="profile.html" class="avatar avatar-sm me-2"><img class="avatar-img rounded-circle" src="assets/img/user/user.jpg" alt="User Image"></a>
-                                                    <a href="profile.html">{{$users->name}} </a>
+                                                    <a href="{{route('admin.users.detail',$users->id)}}" class="avatar avatar-sm me-2"><img class="avatar-img rounded-circle" src="assets/img/user/user.jpg" alt="User Image"></a>
+                                                    <a href="{{route('admin.users.detail',$users->id)}}">{{$users->name}} </a>
                                                 </h2>
                                             </td>
                                             <td>{{$users->email}}</td>
@@ -81,5 +81,20 @@
     <!-- /Page Wrapper -->
 @endsection
 @section('scripts')
-    <!-- -->
+    <script>
+        function confirmation(id) {
+            var urlToRedirect = '/admin/users/approve/' + id;
+            console.log(urlToRedirect);
+            Swal.fire({
+                title: "Kullanıcıyı onaylamak istediğinize emin misiniz?",
+                icon: "question",
+                showCancelButton: true,
+                confirmButtonText: "Onayla",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = urlToRedirect;
+                }
+            });
+        }
+    </script>
 @endsection

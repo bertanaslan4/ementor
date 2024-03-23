@@ -15,26 +15,43 @@
                         </div>
 
                         <!-- Register Form -->
-                        <form action="https://mentoring.dreamstechnologies.com/html/template/index.html">
+                        <form action="{{route('register')}}" method="post">
+                            @csrf
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label class="form-control-label">İsim</label>
-                                        <input id="first-name" type="text" class="form-control" name="first_name" autofocus="">
+                                        <input id="first-name" type="text" class="form-control" name="name" autofocus="">
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label class="form-control-label">Soyisim</label>
-                                        <input id="last-name" type="text" class="form-control" name="last_name">
+                                        <input id="last-name" type="text" class="form-control" name="surname">
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="form-control-label">Email Adres</label>
-                                <input id="email" type="email" class="form-control">
+                                <input id="email" type="email" name="email" class="form-control">
                             </div>
                             <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <div class="form-check form-check-xs custom-checkbox">
+                                            <input type="radio" class="form-check-input" name="role" value="1">
+                                            <label class="form-check-label" for="agree_checkbox_user">Mentor</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <div class="form-check form-check-xs custom-checkbox">
+                                            <input type="radio" class="form-check-input" name="role" value="2">
+                                            <label class="form-check-label" for="agree_checkbox_user">Mentee</label>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label class="form-control-label">Şifre</label>
@@ -47,7 +64,9 @@
                                         <input id="password-confirm" type="password" class="form-control" name="password_confirmation">
                                     </div>
                                 </div>
+
                             </div>
+
                             <div class="form-group">
                                 <div class="form-check form-check-xs custom-checkbox">
                                     <input type="checkbox" class="form-check-input" name="agreeCheckboxUser" id="agree_checkbox_user">

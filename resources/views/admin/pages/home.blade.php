@@ -12,7 +12,7 @@
             <div class="page-header">
                 <div class="row">
                     <div class="col-sm-12">
-                        <h3 class="page-title">Welcome Admin!</h3>
+                        <h3 class="page-title">Hoşgeldiniz</h3>
                         <ul class="breadcrumb">
                             <li class="breadcrumb-item active">Dashboard</li>
                         </ul>
@@ -30,11 +30,11 @@
 											<i class="fe fe-users"></i>
 										</span>
                                 <div class="dash-count">
-                                    <h3>168</h3>
+                                    <h3>{{$mentorCount}}</h3>
                                 </div>
                             </div>
                             <div class="dash-widget-info">
-                                <h6 class="text-muted">Members</h6>
+                                <h6 class="text-muted">Mentor Sayısı</h6>
                                 <div class="progress progress-sm">
                                     <div class="progress-bar bg-primary w-50"></div>
                                 </div>
@@ -50,12 +50,12 @@
 											<i class="fe fe-credit-card"></i>
 										</span>
                                 <div class="dash-count">
-                                    <h3>487</h3>
+                                    <h3>{{$menteeCount}}</h3>
                                 </div>
                             </div>
                             <div class="dash-widget-info">
 
-                                <h6 class="text-muted">Appointments</h6>
+                                <h6 class="text-muted">Mentee Sayısı</h6>
                                 <div class="progress progress-sm">
                                     <div class="progress-bar bg-success w-50"></div>
                                 </div>
@@ -71,12 +71,12 @@
 											<i class="fe fe-star-o"></i>
 										</span>
                                 <div class="dash-count">
-                                    <h3>485</h3>
+                                    <h3>{{$contentCount}}</h3>
                                 </div>
                             </div>
                             <div class="dash-widget-info">
 
-                                <h6 class="text-muted">Mentoring Points</h6>
+                                <h6 class="text-muted">İçerik Sayısı</h6>
                                 <div class="progress progress-sm">
                                     <div class="progress-bar bg-danger w-50"></div>
                                 </div>
@@ -92,12 +92,12 @@
 											<i class="fe fe-folder"></i>
 										</span>
                                 <div class="dash-count">
-                                    <h3>$62523</h3>
+                                    <h3>{{$commentCount}}</h3>
                                 </div>
                             </div>
                             <div class="dash-widget-info">
 
-                                <h6 class="text-muted">Revenue</h6>
+                                <h6 class="text-muted">Yorum Sayısı</h6>
                                 <div class="progress progress-sm">
                                     <div class="progress-bar bg-warning w-50"></div>
                                 </div>
@@ -219,8 +219,8 @@
                                         <tr>
                                             <td>
                                                 <h2 class="table-avatar">
-                                                    <a href="href="{{route('admin.users.detail',$mentor->id)}}" " class="avatar avatar-sm me-2"><img class="avatar-img rounded-circle" src="assets/img/user/user.jpg" alt="User Image"></a>
-                                                    <a href="href="{{route('admin.users.detail',$mentor->id)}}" ">{{$users->name}} </a>
+                                                    <a href="{{route('admin.users.detail',$users->id)}}" class="avatar avatar-sm me-2"><img class="avatar-img rounded-circle" src="assets/img/user/user.jpg" alt="User Image"></a>
+                                                    <a href="{{route('admin.users.detail',$users->id)}}">{{$users->name}} </a>
                                                 </h2>
                                             </td>
                                             <td>{{$users->email}}</td>

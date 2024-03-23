@@ -11,20 +11,24 @@
 
                 <!-- Search -->
                 <div class="search-box-eight aos" data-aos="fade-up">
-                    <form action="#">
+                    <form action="{{route('search')}}" method="post">
+                        @csrf
                         <div class="form-search">
                             <div class="form-inner">
                                 <div class="form-group search-location-eight">
                                     <i class="material-icons">my_location</i>
-                                    <select class="form-control select">
+                                    <select name="category" class="form-control select" required>
                                         <option>Kategori Seçin</option>
-                                        <option>İçerik</option>
-                                        <option>Mentor</option>
+                                        <option value="sss">S.S.S</option>
+                                        @if(auth()->check())
+                                            <option value="content">İçerik</option>
+                                            <option value="mentor">Mentor</option>
+                                        @endif
                                     </select>
                                 </div>
                                 <div class="form-group search-info-eight">
                                     <i class="material-icons">location_city</i>
-                                    <input type="text" class="form-control" placeholder="Arama Yapın">
+                                    <input type="text" name="search" class="form-control" placeholder="Arama Yapın" required>
                                 </div>
                                 <button type="submit" class="btn search-btn-eight mt-0">Ara <i class="fas fa-long-arrow-alt-right"></i></button>
                             </div>

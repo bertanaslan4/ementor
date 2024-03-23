@@ -26,4 +26,36 @@ class PageController extends Controller
         $section = Menu::where('id',$id)->with('children')->first();
         return view('front.pages.menu',compact('section'));
     }
+
+    public function search(Request $request)
+    {
+        $searchTerm = $request->input('search');
+
+        switch ($request->input('category')) {
+            case 'content':
+                $blogs = InfoBlogs::where('title', 'like', '%' . $searchTerm . '%')
+                    ->orWhere('text', 'like', '%' . $searchTerm . '%')
+                    ->orWhere('short_text', 'like', '%' . $searchTerm . '%')
+                    ->with('user')->orderBy('id','desc')->paginate(6);
+                return view('front.search.blog', compact('blogs'));
+                break;
+            case 'mentor':
+                $mentors = User::where('name', 'like', '%' . $searchTerm . '%')
+                    ->where('role', 1)
+                    ->orWhere('surname', 'like', '%' . $searchTerm . '%')
+                    ->with('userInfo','infoBlogs')->get();
+                return view('front.search.mentors', compact('mentors'));
+                break;
+            case 'sss':
+                $faqs = Faqs::where('question', 'like', '%' . $searchTerm . '%')
+                    ->orWhere('answer', 'like', '%' . $searchTerm . '%')
+                    ->get();
+                return view('front.search.faqs', compact('faqs'));
+                break;
+            default:
+                // Kategori belirtilmemişse, ana arama sayfasına yönlendirme yapılabilir
+                return redirect()->route('search', ['search' => $searchTerm]);
+                break;
+        }
+    }
 }

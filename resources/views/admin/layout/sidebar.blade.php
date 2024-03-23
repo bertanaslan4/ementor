@@ -24,9 +24,9 @@
                 <li>
                     <a href="{{route('admin.settings')}}"><span>Site Ayarları</span></a>
                 </li>
-{{--                <li>--}}
-{{--                    <a href="{{route('admin.calendar')}}"><span>Takvim</span></a>--}}
-{{--                </li>--}}
+                <li>
+                    <a href="{{route('admin.calendar')}}"><span>Takvim</span></a>
+                </li>
 
 
                 <li class="menu-title">

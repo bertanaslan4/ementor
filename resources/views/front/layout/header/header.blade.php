@@ -11,13 +11,13 @@
 							</span>
                 </a>
                 <a href="{{route('home')}}" class="navbar-brand logo">
-                    <img src="{{asset('front/img/logo-9.png')}}" class="img-fluid" alt="Logo">
+                    <img src="{{asset('images/settings/'.$settings->site_logo)}}" class="img-fluid" alt="Logo">
                 </a>
             </div>
             <div class="main-menu-wrapper main-menu-wrapper-eight" style="margin: auto">
                 <div class="menu-header">
                     <a href="{{route('home')}}" class="menu-logo">
-                        <img src="{{asset('front/img/logo-9.png')}}" class="img-fluid" alt="Logo">
+                        <img src="{{asset('images/settings/'.$settings->site_logo)}}" class="img-fluid" alt="Logo">
                     </a>
                     <a id="menu_close" class="menu-close" href="javascript:void(0);">
                         <i class="fas fa-times"></i>

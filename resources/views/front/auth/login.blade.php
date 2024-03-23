@@ -11,14 +11,12 @@
                 <div class="account-box">
                     <div class="login-right">
                         <div class="login-header">
-                            <h3>Ementor <span>Giriş</span></h3>
+                            <h3>E mentor <span>Giriş</span></h3>
                         </div>
-                        @if($errors->any())
-                            @foreach($errors->all() as $error)
-                                <div class="alert alert-danger" role="alert">
-                                    {{$error}}
-                                </div>
-                            @endforeach
+                        @if(session('error'))
+                            <div class="alert alert-danger" role="alert">
+                                {{ session('error') }}
+                            </div>
                         @endif
                         <form action="{{route('login')}}" method="POST">
                             @csrf

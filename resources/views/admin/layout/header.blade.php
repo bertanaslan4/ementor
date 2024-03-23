@@ -16,12 +16,7 @@
         <i class="fe fe-text-align-left"></i>
     </a>
 
-    <div class="top-nav-search">
-        <form>
-            <input type="text" class="form-control" placeholder="Search here">
-            <button class="btn" type="submit"><i class="fa fa-search"></i></button>
-        </form>
-    </div>
+
 
     <!-- Mobile Menu Toggle -->
     <a class="mobile_btn" id="mobile_btn">
@@ -45,12 +40,11 @@
                         <img src="{{asset('admin/assets/img/profiles/avatar-12.jpg')}}" alt="User Image" class="avatar-img rounded-circle">
                     </div>
                     <div class="user-text">
-                        <h6>Allen Davis</h6>
-                        <p class="text-muted mb-0">Administrator</p>
+                        <h6>Merve Beke</h6>
+                        <p class="text-muted mb-0">Admin</p>
                     </div>
                 </div>
-                <a class="dropdown-item" href="profile.html">My Profile</a>
-                <a class="dropdown-item" href="settings.html">Settings</a>
+
                 <a class="dropdown-item" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Çıkış Yap</a>
 
                 <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" style="display: none;">

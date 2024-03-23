@@ -24,9 +24,8 @@
                             </div>
                             <div class="col ms-md-n2 profile-user-info">
                                 <h4 class="user-name mb-0">{{$user->name}} {{$user->surname}}</h4>
-                                <h6 class="text-muted"><a href="https://mentoring.dreamstechnologies.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b0d1dcdcd5ded4d1c6d9c3f0d1d4ddd9de9ed3dfdd">[email&#160;protected]</a></h6>
-                                <div class="pb-3"><i class="fa fa-map-marker"></i> @if($user->userInfo) {{$user->userInfo->first()->city}}, {{$user->userInfo->first()->state}}@endif</div>
-                                <div class="about-text">@if($user->Info) {{$user->userInfo->first()->about ? : ''}} @endif</div>
+                                <div class="pb-3"><i class="fa fa-map-marker"></i> @if($user->userInfo->first()) {{$user->userInfo->first()->city}}, {{$user->userInfo->first()->state}}@endif</div>
+                                <div class="about-text">@if($user->userInfo->first()) {{$user->userInfo->first()->about ? : ''}} @endif</div>
                             </div>
                             <div class="col-auto profile-btn">
                             </div>
@@ -62,7 +61,7 @@
                                             </div>
                                             <div class="row">
                                                 <p class="col-sm-2 text-muted mb-0 mb-sm-3">Doğum Günü </p>
-                                                <p class="col-sm-10">@if($user->userInfo) {{$user->userInfo->first()->birthday ? : ''}} @endif</p>
+                                                <p class="col-sm-10">@if($user->userInfo->first()) {{$user->userInfo->first()->birthday ? : ''}} @endif</p>
                                             </div>
                                             <div class="row">
                                                 <p class="col-sm-2 text-muted mb-0 mb-sm-3">Email </p>
@@ -70,11 +69,11 @@
                                             </div>
                                             <div class="row">
                                                 <p class="col-sm-2 text-muted mb-0 mb-sm-3">Telefon</p>
-                                                <p class="col-sm-10">@if($user->userInfo) {{$user->userInfo->first()->phone ? : ''}} @endif</p>
+                                                <p class="col-sm-10">@if($user->userInfo->first()) {{$user->userInfo->first()->phone ? : ''}} @endif</p>
                                             </div>
                                             <div class="row">
                                                 <p class="col-sm-2 text-muted mb-0">Adres</p>
-                                                <p class="col-sm-10 mb-0">@if($user->userInfo) {{$user->userInfo->first()->address ? : ''}} @endif</p>
+                                                <p class="col-sm-10 mb-0">@if($user->userInfo->first()){{$user->userInfo->first()->address ? : ''}} @endif</p>
                                             </div>
                                         </div>
                                     </div>
@@ -93,7 +92,7 @@
                         <div id="password_tab" class="tab-pane fade">
 
                             @if($user->role == 1)
-                                @if($user->mentor)
+                                @if($user->mentor->first())
                                     <!-- Personal Details -->
                                     <div class="row">
                                         <div class="col-lg-12">
@@ -152,7 +151,7 @@
                                     <!-- /Personal Details -->
                                 @endif
                             @else
-                                @if($user->mentee)
+                                @if($user->mentee->first())
                                     <!-- Personal Details -->
                                     <div class="row">
                                         <div class="col-lg-12">

@@ -2971,7 +2971,7 @@ html.menu-opened body {
 	color: #fff;
 }
 .bg-pattern-style {
-    background: url(../img/home_art.jpg) no-repeat;
+    background: url(../img/login-front.png) no-repeat;
     background-position: center;
     background-size: cover;
     width: 100%;
@@ -11780,7 +11780,7 @@ div.dataTables_wrapper div.dataTables_filter input{
 
 .section-search-eight {
 	min-height: 450px;
-    background: url(../img/banner-08.jpg);
+    background: url(../img/banner-08.png);
     background-size: cover !important;
     background-repeat: no-repeat;
     background-position: center;

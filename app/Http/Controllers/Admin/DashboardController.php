@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Anno;
 use App\Models\AnnoUser;
+use App\Models\Comments;
+use App\Models\InfoBlogs;
 use App\Models\Relations;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -34,14 +36,18 @@ class DashboardController extends Controller
             ->get();
 
         $waitedUsers = User::where('status', 0)
-            ->orderBy('id', 'asc')
+            ->orderBy('id', 'desc')
             ->take(5)
             ->get();
         //dd($lastMentors, $lastMentees);
         $deleteTitle = 'Kullanıcı Sil!';
         $deleteText = "Kullanıcıyı silmek istediğinizden emin misiniz?";
+        $menteeCount = User::where('role', 2)->where('status', 1)->count();
+        $mentorCount = User::where('role', 1)->where('status', 1)->count();
+        $contentCount = InfoBlogs::all()->count();
+        $commentCount = Comments::all()->count();
         confirmDelete($deleteTitle, $deleteText);
-        return view('admin.pages.home', compact('lastMentors', 'lastMentees', 'waitedUsers'));
+        return view('admin.pages.home', compact('lastMentors', 'lastMentees', 'waitedUsers', 'menteeCount', 'mentorCount', 'contentCount', 'commentCount'));
     }
     public function showLoginForm()
     {

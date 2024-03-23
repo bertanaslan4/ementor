@@ -9,7 +9,7 @@
                     <!-- Footer Widget -->
                     <div class="footer-widget footer-about">
                         <div class="footer-logo">
-                            <img src="{{asset('front/img/logo-9.png')}}" alt="logo">
+                            <img src="{{asset('images/settings/'.$settings->site_logo)}}" alt="logo">
                         </div>
 
                     </div>

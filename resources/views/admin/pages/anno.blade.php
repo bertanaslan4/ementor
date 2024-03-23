@@ -58,8 +58,9 @@
                                             <td class="text-primary">{{$anno->title}}</td>
                                             <td>{{$anno->created_at->format('d-m-Y')}}</td>
                                             <td class="text-end">
-                                                <a href="" class="btn btn-sm btn-white text-success me-2"><i class="far fa-edit me-1"></i> Detay</a>
-
+                                                <button class="btn btn-sm btn-white text-success me-2" onclick="openAnnoDetailModal('{{ $anno->short_description }}', '{{ $anno->description }}')">
+                                                    <i class="far fa-edit me-1"></i> Detay
+                                                </button>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -72,9 +73,32 @@
                 </div>
             </div>
         </div>
+        <div class="modal fade" id="annoDetailModal" tabindex="-1" role="dialog" aria-labelledby="annoDetailModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="annoDetailModalLabel">Anno Detayları</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div id="annoShortDescription"></div>
+                        <div id="annoDescription"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <!-- /Page Wrapper -->
 @endsection
 @section('scripts')
-    <!-- -->
+    <script>
+        function openAnnoDetailModal(shortDescription, description) {
+            $('#annoShortDescription').text(shortDescription);
+            $('#annoDescription').text(description);
+            $('#annoDetailModal').modal('show');
+        }
+    </script>
+
 @endsection
