@@ -1,5 +1,6 @@
 @extends('admin.app')
 @section('styles')
+    <meta charset="UTF-8">
     <script src="{{asset('front/js/jquery-3.6.0.min.js')}}"></script>
     <!-- include libraries(jQuery, bootstrap) -->
 
@@ -75,6 +76,7 @@
     </div>
     <script>
         $('#content').summernote({
+            lang: 'tr-TR', // Türkçe dil desteği
             placeholder: 'İçerik Ekleyin..',
             tabsize: 2,
             height: 300,
@@ -86,8 +88,16 @@
                 ['table', ['table']],
                 ['insert', ['link', 'picture', 'video']],
                 ['view', ['fullscreen', 'codeview', 'help']]
-            ]
+            ],
+            callbacks: {
+                onInit: function() {
+                    // Türkçe karakterler için font ayarı
+                    $('.note-editable').css('font-family', 'Arial, sans-serif');
+                }
+            }
         });
+
+
     </script>
     <!-- /Page Wrapper -->
 @endsection

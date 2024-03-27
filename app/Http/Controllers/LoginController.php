@@ -50,6 +50,7 @@ class LoginController extends Controller
                 }
             }
             else{
+                $mentee  = User::where('id',auth()->user()->id)->with('mentor')->first();
                 $annoCount=0;
                 $annos = AnnoUser::where('user_id',auth()->user()->id)->get();
                 foreach ($annos as $anno)
@@ -66,6 +67,12 @@ class LoginController extends Controller
                 else
                 {
                     session(['anno' => null]);
+                }if(!is_null($mentee->mentor->first())){
+                    session(['mentee' => $mentee->mentor->first()->mentee_id]);
+                }
+                else
+                {
+                    session(['mentee' => null]);
                 }
             }
 

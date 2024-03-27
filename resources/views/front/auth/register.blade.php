@@ -21,25 +21,25 @@
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label class="form-control-label">İsim</label>
-                                        <input id="first-name" type="text" class="form-control" name="name" autofocus="">
+                                        <input id="first-name" type="text" class="form-control" name="name" autofocus="" required>
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label class="form-control-label">Soyisim</label>
-                                        <input id="last-name" type="text" class="form-control" name="surname">
+                                        <input id="last-name" type="text" class="form-control" name="surname" required>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="form-control-label">Email Adres</label>
-                                <input id="email" type="email" name="email" class="form-control">
+                                <input id="email" type="email" name="email" class="form-control" required>
                             </div>
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <div class="form-check form-check-xs custom-checkbox">
-                                            <input type="radio" class="form-check-input" name="role" value="1">
+                                            <input type="radio" class="form-check-input" name="role" value="1" required>
                                             <label class="form-check-label" for="agree_checkbox_user">Mentor</label>
                                         </div>
                                     </div>
@@ -47,7 +47,7 @@
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <div class="form-check form-check-xs custom-checkbox">
-                                            <input type="radio" class="form-check-input" name="role" value="2">
+                                            <input type="radio" class="form-check-input" name="role" value="2" required>
                                             <label class="form-check-label" for="agree_checkbox_user">Mentee</label>
                                         </div>
                                     </div>
@@ -55,13 +55,13 @@
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label class="form-control-label">Şifre</label>
-                                        <input id="password" type="password" class="form-control" name="password">
+                                        <input id="password" type="password" class="form-control" name="password" required>
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label class="form-control-label">Şifre Tekrar</label>
-                                        <input id="password-confirm" type="password" class="form-control" name="password_confirmation">
+                                        <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
                                     </div>
                                 </div>
 
@@ -69,7 +69,7 @@
 
                             <div class="form-group">
                                 <div class="form-check form-check-xs custom-checkbox">
-                                    <input type="checkbox" class="form-check-input" name="agreeCheckboxUser" id="agree_checkbox_user">
+                                    <input type="checkbox" class="form-check-input" name="agreeCheckboxUser" id="agree_checkbox_user" required>
                                     <label class="form-check-label" for="agree_checkbox_user">KVKK ve </label> <a tabindex="-1" href="javascript:void(0);">Gizlilik Sözleşmesini</a> &amp; <a tabindex="-1" href="javascript:void(0);"> kabul ediyorum.</a>
                                 </div>
                             </div>

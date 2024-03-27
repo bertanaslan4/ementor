@@ -35,7 +35,7 @@
                                             <div class="course-content">
                                                 <span class="date">{{$faq->created_at->format('d-m-Y')}}</span>
                                                 <span class="course-title">{{$faq->question}}</span>
-                                                <p>{!! substr($faq->answer,0,40)!!}...</p>
+
                                                 <div class="row">
                                                     <div class="col">
                                                         <a href="{{route('admin.faqs.edit',$faq->id)}}" class="text-primary">

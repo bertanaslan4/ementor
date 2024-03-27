@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Faqs;
+use DOMDocument;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class FaqsController extends Controller
@@ -25,11 +26,39 @@ class FaqsController extends Controller
             'question' => 'required',
             'answer' => 'required',
         ]);
+
         $faq = new Faqs();
         $faq->question = $request->question;
-        $faq->answer = $request->answer;
+
+        $answer = $request->answer;
+        $dom = new DOMDocument();
+        $content = '<?xml encoding="UTF-8">' . $answer;
+        $dom->loadHTML($answer, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+        libxml_use_internal_errors(true);
+
+        libxml_clear_errors();
+        $images = $dom->getElementsByTagName('img');
+
+        foreach ($images as $item=>$image) {
+            $data = $image->getAttribute('src');
+            list($type, $data) = explode(';', $data);
+            list(, $data)      = explode(',', $data);
+            $imgeData = base64_decode($data);
+            $image_name = "/images/faqs" . time() . $item . '.png';
+            $path = public_path() . $image_name;
+            file_put_contents($path, $imgeData);
+            $image->removeAttribute('src');
+            $image->setAttribute('src', $image_name);
+        }
+
+        $answer = $dom->saveHTML();
+
+        $faq->answer = $answer;
+
         $faq->save();
+
         Alert::success('Başarılı', 'Başarıyla eklendi.');
+
         return redirect()->route('admin.faqs');
     }
     public function edit($id)
@@ -47,10 +76,41 @@ class FaqsController extends Controller
         $faq = Faqs::find($id);
         $faq->question = $request->question;
         $faq->answer = $request->answer;
+
+        // HTML içeriğindeki resimleri işleme
+        $content = $request->input('answer');
+        $dom = new DOMDocument();
+        $content = '<?xml encoding="UTF-8">' . $content;
+        $dom->loadHTML($content, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+        libxml_use_internal_errors(true);
+
+        libxml_clear_errors();
+        $images = $dom->getElementsByTagName('img');
+
+        foreach ($images as $item => $image) {
+            $data = $image->getAttribute('src');
+
+            list($type, $data) = explode(';', $data);
+            list(, $data) = explode(',', $data);
+
+            $imageData = base64_decode($data);
+
+            $imageName = "/images/faqs" . time() . $item . '.png';
+            $path = public_path() . $imageName;
+
+            file_put_contents($path, $imageData);
+
+            $image->removeAttribute('src');
+            $image->setAttribute('src', $imageName);
+        }
+        $content = $dom->saveHTML();
+        $faq->answer = $content;
+
         $faq->save();
         Alert::success('Başarılı', 'Başarıyla güncellendi.');
         return redirect()->route('admin.faqs');
     }
+
     public function passive($id)
     {
         $faq = Faqs::find($id);

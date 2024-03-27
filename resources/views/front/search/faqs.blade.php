@@ -75,7 +75,7 @@
                                                         </div>
 
                                                         <p class="comment-content">
-                                                            {{$faq->answer}}
+                                                            {!!  $faq->answer !!}
                                                         </p>
 
                                                     </div>

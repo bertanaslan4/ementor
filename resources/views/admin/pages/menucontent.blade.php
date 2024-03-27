@@ -46,8 +46,6 @@
                                     <thead class="thead-light">
                                     <tr>
                                         <th>Başlık</th>
-
-                                        <th>İçerik</th>
                                         <th>Tarih</th>
                                         <th class="text-end">İşlem</th>
                                     </tr>
@@ -57,7 +55,6 @@
                                         <tr>
 
                                             <td class="text-primary">{{$content->name}}</td>
-                                            <td>{!! substr($content->content,0,40) !!}..</td>
                                             <td>{{$content->created_at->format('d-m-Y')}}</td>
                                             <td class="text-end">
                                                 <a href="{{route('admin.menu.edit',$content->id)}}" class="btn btn-sm btn-white text-success me-2"><i class="far fa-edit me-1"></i> Düzenle</a>

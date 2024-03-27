@@ -8,7 +8,7 @@
 <div class="container">
 
     <div class="row">
-        <div class="col-8">
+        <div class="col-lg-8 col-md-12">
             <div class="calendar">
                 <div class="calendar-header">
                     <button id="prevMonth">&lt;</button>
@@ -138,7 +138,7 @@
 
             </div>
         </div>
-        <div class="col-4">
+        <div class="col-lg-4 col-md-12">
             <!-- Latest Posts -->
             <div class="card post-widget" style="margin-top: 70px;">
                 <div class="card-header">

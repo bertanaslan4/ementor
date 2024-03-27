@@ -13,6 +13,7 @@ class PageController extends Controller
 {
     public function index()
     {
+        //dd(session('mentor'),session('mentee'));
 
         $blogs = InfoBlogs::with('user')->orderBy('id','desc')->limit(3)->get();
         $faqs = Faqs::all()->take(6);

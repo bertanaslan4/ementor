@@ -45,8 +45,10 @@ class MenuController extends Controller
         $menuContent->name = $name;
         $menuContent->menu_id = $menu_id;
         $dom = new DOMDocument();
+        $content = '<?xml encoding="UTF-8">' . $content;
+        $dom->loadHTML($content, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
         libxml_use_internal_errors(true);
-        $dom->loadHTML($content);
+
         libxml_clear_errors();
         $images = $dom->getElementsByTagName('img');
 
@@ -96,8 +98,9 @@ class MenuController extends Controller
         $menuContent->name = $name;
         $menuContent->menu_id = $menu_id;
         $dom = new DOMDocument();
+        $content = '<?xml encoding="UTF-8">' . $content;
+        $dom->loadHTML($content, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
         libxml_use_internal_errors(true);
-        $dom->loadHTML($content);
         libxml_clear_errors();
         $images = $dom->getElementsByTagName('img');
 

@@ -24,70 +24,130 @@
                     </a>
                 </div>
                 <ul class="main-nav" >
-                    <li class="has-submenu">
+                    <li>
                         <a href="{{route('home')}}">Anasayfa</a>
                     </li>
                     @foreach($menus as $menu)
-                        <li class="has-submenu">
+                        <li >
                             <a href="{{route('menu.detail',$menu->id)}}">{{$menu->name}}</a>
                         </li>
                     @endforeach
                     @if(auth()->check())
-                        <li class="has-submenu">
+                        <li >
                             <a href="{{route('infoblog')}}">Bilgi Kaynağı</a>
                         </li>
-                        <li class="has-submenu">
+                        <li >
                             <a href="{{route('mentors')}}">Mentorler</a>
                         </li>
                     @endif
-                    <li class="has-submenu">
+                    <li >
                         <a href="{{route('faqs')}}">S.S.S</a>
                     </li>
 
-{{--                    <li>--}}
-{{--                        <a href="admin/index.html" target="_blank">Admin</a>--}}
-{{--                    </li>--}}
+
+                    @if(auth()->check())
+                        @if(session('anno')!=null)
+                            <li class="mobile">
+                                <a href="{{route('anno')}}">Duyurular</a>
+                            </li>
+                        @endif
+                        @if(auth()->user()->role == 1)
+                            <li class="mobile">
+                                <a href="{{route('calendar')}}">Takvim</a>
+                            </li>
+                            <li class="mobile">
+                                <a href="{{route('dashboard')}}">Dashboard</a>
+                            </li>
+                            @else
+                                <li class="mobile">
+                                    <a href="{{route('calendar')}}">Takvim</a>
+                                </li>
+                                <li class="mobile">
+                                    <a href="{{route('profile',auth()->user()->id)}}">Profilim</a>
+                                </li>
+                                @if(session('mentor')!=null)
+                                    <li class="mobile">
+                                        <a href="{{route('chat',session('mentor'))}}">Mesajlar</a>
+                                    </li>
+                               @endif
+
+                       @endif
+                        <li class="mobile">
+                            <a class="dropdown-item" href="#" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Çıkış Yap
+                                <form id="logout-form" action="{{route('logout')}}" method="POST" style="display: none;">
+                                    @csrf
+                                </form>
+                            </a>
+                        </li>
+                    @else
+                       
+                            <li class="mobile">
+                                <a href="{{route('login')}}">Giriş Yap</a>
+                            </li>
+                            <li class="mobile">
+                                <a href="{{route('register')}}">Kayıt Ol</a>
+                            </li>
+                    @endif
 
 
-
-                    <li class="login-link">
-                        <a href="{{route('login')}}">Giriş Yap</a>
-                    </li>
                 </ul>
             </div>
             @if(auth()->check())
                 <ul class="nav header-navbar-rht" style="margin-left: 0px!important;">
 
-                    @if(session('anno')!=null)
+
                         <li class="nav-item dropdown has-arrow logged-item">
                             <a href="{{route('anno')}}">
                                 <div class="rounded-circle">
                                     <i class="fa fa-bell" style="font-size: 24px"></i>
                                 </div>
-
+                                @if(session('anno')!=null)
                                 <div
                                     class="badge badge-danger badge-pill fill-red rounded-pill"
                                 >
                                     1
                                 </div>
+                                @endif
                             </a>
                         </li>
-                    @endif
-                    @if(auth()->user()->messenger_color == 1)
+
                         <li class="nav-item dropdown has-arrow logged-item">
-                            <a>
-                                <div class="rounded-circle">
-                                    <i class="fa fa-comment" style="font-size: 24px"></i>
-                                </div>
+                            @if(auth()->user()->role == 1)
+                                @if(session('mentee')!=null)
+                                    <a href="{{route('chat',session('mentee'))}}">
+                                        <div class="rounded-circle">
+                                            <i class="fa fa-comment" style="font-size: 24px"></i>
+                                        </div>
+                                        @if(auth()->user()->messenger_color == 1)
+                                            <div
+                                                class="badge badge-danger badge-pill fill-red rounded-pill"
+                                            >
+                                                1
+                                            </div>
+                                        @endif
+                                    </a>
 
-                                <div
-                                    class="badge badge-danger badge-pill fill-red rounded-pill"
-                                >
-                                    1
-                                </div>
-                            </a>
+                                @endif
+                            @else
+                                @if(session('mentor')!=null)
+                                    <a href="{{route('chat',session('mentor'))}}">
+                                        <div class="rounded-circle">
+                                            <i class="fa fa-comment" style="font-size: 24px"></i>
+                                        </div>
+                                        @if(auth()->user()->messenger_color == 1)
+                                            <div
+                                                class="badge badge-danger badge-pill fill-red rounded-pill"
+                                            >
+                                                1
+                                            </div>
+                                        @endif
+                                    </a>
+                                @endif
+                            @endif
                         </li>
-                    @endif
+
+
+
                     <!-- User Menu -->
                     <li class="nav-item dropdown has-arrow logged-item">
                         <a href="#" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
@@ -121,6 +181,7 @@
                             @if(auth()->user()->role == 1)
                                 <a class="dropdown-item" href="{{route('dashboard')}}">Dashboard</a>
                                 <a class="dropdown-item" href="{{route('calendar')}}">Takvim</a>
+
                                 @else
                                 <a class="dropdown-item" href="{{route('profile',auth()->user()->id)}}">Profilim</a>
                                     @if(session('mentor')!=null)
