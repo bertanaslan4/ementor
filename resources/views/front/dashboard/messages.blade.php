@@ -1,5 +1,7 @@
 @extends('front.layout.dashtemp')
-
+@php
+    $hideFooter = true;
+@endphp
 @section('content')
     <div class="col-md-7 col-lg-8 col-xl-9">
 

@@ -46,8 +46,9 @@
         <div class="container-fluid">
 
             <div class="row">
+                @if (!isset($hideFooter) || !$hideFooter)
                 @include('front.layout.partials.dashside')
-
+                @endif
                @yield('content')
             </div>
 
@@ -57,7 +58,9 @@
     <!-- /Page Content -->
 {{--    @include('sweetalert::alert')--}}
 
-    @include('front.layout.footer.footer')
+    @if (!isset($hideFooter) || !$hideFooter)
+        @include('front.layout.footer.footer')
+    @endif
 
 </div>
 <!-- /Main Wrapper -->
