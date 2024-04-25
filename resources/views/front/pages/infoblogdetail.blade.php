@@ -47,20 +47,19 @@
                             </div>
                         </div>
 
-                        <div class="card blog-share clearfix">
-                            <div class="card-header">
-                                <h4 class="card-title">Share the post</h4>
+                        @if($infoDocs)
+                            <div class="card blog-share clearfix">
+                                <div class="card-header">
+                                    <h4 class="card-title">Belgeler</h4>
+                                </div>
+                                <div class="card-body">
+
+                                        @foreach($infoDocs as $infoDoc)
+                                           <a href="{{asset('docs/'.$infoDoc->docs)}}" download><i class="fa fa-download"></i> Belgeyi indirmek için tıklayınız</a>
+                                        @endforeach
+                                </div>
                             </div>
-                            <div class="card-body">
-                                <ul class="social-share">
-                                    <li><a href="#" title="Facebook"><i class="fab fa-facebook"></i></a></li>
-                                    <li><a href="#" title="Twitter"><i class="fab fa-twitter"></i></a></li>
-                                    <li><a href="#" title="Linkedin"><i class="fab fa-linkedin"></i></a></li>
-                                    <li><a href="#" title="Google Plus"><i class="fab fa-google-plus"></i></a></li>
-                                    <li><a href="#" title="Youtube"><i class="fab fa-youtube"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
+                        @endif
                         @if($blog->user->userInfo->first()->about)
                             <div class="card author-widget clearfix">
                                 <div class="card-header">

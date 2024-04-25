@@ -68,48 +68,54 @@ class FaqsController extends Controller
     }
     public function update(Request $request)
     {
-        $id = $request->id;
         $request->validate([
             'question' => 'required',
             'answer' => 'required',
         ]);
-        $faq = Faqs::find($id);
-        $faq->question = $request->question;
-        $faq->answer = $request->answer;
 
-        // HTML içeriğindeki resimleri işleme
-        $content = $request->input('answer');
+        $id = $request->input('id');
+        $question = $request->input('question');
+        $answer = $request->input('answer');
+
+        $faq = Faqs::find($id);
+        $faq->question = $question;
         $dom = new DOMDocument();
-        $content = '<?xml encoding="UTF-8">' . $content;
+        $content = '<?xml encoding="UTF-8">' . $answer;
         $dom->loadHTML($content, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
         libxml_use_internal_errors(true);
-
         libxml_clear_errors();
         $images = $dom->getElementsByTagName('img');
 
-        foreach ($images as $item => $image) {
-            $data = $image->getAttribute('src');
+        if ($images) {
+            foreach ($images as $item => $image) {
+                $data = $image->getAttribute('src');
+                // ';' karakterini içeriyorsa
+                if (strpos($data, ';') !== false) {
+                    list($type, $data) = explode(';', $data);
+                    list(, $data) = explode(',', $data);
 
-            list($type, $data) = explode(';', $data);
-            list(, $data) = explode(',', $data);
+                    $imageData = base64_decode($data);
+                    $imageName = "/images/faqs" . time() . $item . '.png';
+                    $path = public_path() . $imageName;
+                    file_put_contents($path, $imageData);
 
-            $imageData = base64_decode($data);
-
-            $imageName = "/images/faqs" . time() . $item . '.png';
-            $path = public_path() . $imageName;
-
-            file_put_contents($path, $imageData);
-
-            $image->removeAttribute('src');
-            $image->setAttribute('src', $imageName);
+                    $image->removeAttribute('src');
+                    $image->setAttribute('src', $imageName);
+                } else {
+                }
+            }
         }
+
         $content = $dom->saveHTML();
         $faq->answer = $content;
 
         $faq->save();
-        Alert::success('Başarılı', 'Başarıyla güncellendi.');
+
+        Alert::success('Başarılı', 'Soru ve cevap başarıyla güncellendi.');
         return redirect()->route('admin.faqs');
     }
+
+
 
     public function passive($id)
     {

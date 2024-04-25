@@ -34,13 +34,13 @@
                                                <div class="meta-data">
                                                    <span class="comment-author">Soru : {{ $faq->question}} </span>
                                                    <span class="comment-date">{{$faq->created_at->format('d-m-Y')}}</span>
-                                                   <div class="review-count rating">
-                                                       <i class="fas fa-star filled"></i>
-                                                       <i class="fas fa-star filled"></i>
-                                                       <i class="fas fa-star filled"></i>
-                                                       <i class="fas fa-star filled"></i>
-                                                       <i class="fas fa-star"></i>
-                                                   </div>
+{{--                                                   <div class="review-count rating">--}}
+{{--                                                       <i class="fas fa-star filled"></i>--}}
+{{--                                                       <i class="fas fa-star filled"></i>--}}
+{{--                                                       <i class="fas fa-star filled"></i>--}}
+{{--                                                       <i class="fas fa-star filled"></i>--}}
+{{--                                                       <i class="fas fa-star"></i>--}}
+{{--                                                   </div>--}}
                                                </div>
 {{--                                               <p class="recommended"><i class="far fa-thumbs-up"></i> I recommend the consectetur</p>--}}
                                                  <hr>

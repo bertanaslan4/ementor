@@ -94,7 +94,7 @@ Route::prefix('admin')->middleware('redirect.if.not.admin')->group(function () {
     Route::get('/users/approve/{id}', [UserController::class, 'approve'])->name('admin.users.approve');
     Route::get('/relations', [RelationsController::class, 'index'])->name('admin.relations');
     Route::post('/relations', [RelationsController::class, 'create'])->name('admin.relations.create');
-    Route::delete('/relations/destroy/{id}', [RelationsController::class, 'destroy'])->name('admin.relations.destroy');
+    Route::get('/relations/destroy/{id}', [RelationsController::class, 'destroy'])->name('admin.relations.destroy');
     Route::get('/faqs', [AdminFaqsController::class, 'list'])->name('admin.faqs');
     Route::get('/faqs/create', [AdminFaqsController::class, 'create'])->name('admin.faqs.create');
     Route::post('/faqs/store', [AdminFaqsController::class, 'store'])->name('admin.faqs.store');

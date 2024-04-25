@@ -43,7 +43,7 @@
 
                                         <div class="form-group">
                                             <label>Cevap</label>
-                                            <textarea id="content"  cols="30" name="answer" rows="6" class="form-control">{{$faq->answer}}</textarea>
+                                            <textarea id="content"  cols="30" name="answer" rows="6" class="form-control">{!! $faq->answer!!}</textarea>
                                         </div>
 
                                         <div class="m-t-20 text-center">
@@ -63,6 +63,7 @@
     </div>
     <script>
         $('#content').summernote({
+            lang: 'tr-TR', // Türkçe dil desteği
             placeholder: 'İçerik Ekleyin..',
             tabsize: 2,
             height: 300,
@@ -74,7 +75,13 @@
                 ['table', ['table']],
                 ['insert', ['link', 'picture', 'video']],
                 ['view', ['fullscreen', 'codeview', 'help']]
-            ]
+            ],
+            callbacks: {
+                onInit: function() {
+                    // Türkçe karakterler için font ayarı
+                    $('.note-editable').css('font-family', 'Arial, sans-serif');
+                }
+            }
         });
     </script>
     <!-- /Page Wrapper -->

@@ -16,7 +16,7 @@ class PageController extends Controller
         //dd(session('mentor'),session('mentee'));
 
         $blogs = InfoBlogs::with('user')->orderBy('id','desc')->limit(3)->get();
-        $faqs = Faqs::all()->take(6);
+        $faqs = Faqs::where('status',1)->orderBy('id','desc')->take(6);
 
 
         //dd($blogs);
@@ -54,7 +54,6 @@ class PageController extends Controller
                 return view('front.search.faqs', compact('faqs'));
                 break;
             default:
-                // Kategori belirtilmemişse, ana arama sayfasına yönlendirme yapılabilir
                 return redirect()->route('search', ['search' => $searchTerm]);
                 break;
         }

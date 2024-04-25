@@ -125,12 +125,10 @@
 
                     @foreach($faqs as $faq)
                         <!-- Mentor Item -->
-                        <div class="mendor-box">
+                        <div class="mendor-box" style="min-height: 125px;">
                             <div class="mendor-content">
                                 <h3 class="title">{{$faq->question}}</h3>
-                                <div class="mendor-course">
-                                    {{substr($faq->answer,0,100)}}...
-                                </div>
+
 
                             </div>
                         </div>

@@ -23,7 +23,9 @@
 
     @yield('content')
 
-    @include('front.layout.footer.footer')
+    @if (!isset($hideFooter) || !$hideFooter)
+        @include('front.layout.footer.footer')
+    @endif
     @include('sweetalert::alert')
 
 </div>

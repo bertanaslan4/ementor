@@ -157,16 +157,16 @@ class DashboardController extends Controller
             ]);
         }
 
-        if (!isNull($request->file('images'))) {
-            foreach ($request->file('images') as $image) {
-                $imageName = time() . '_' . $image->getClientOriginalName();
-                $image->move(public_path('images'), $imageName);
+        $infodocs = $request->file('infodocs');
+        if ($infodocs) {
+                $docName = time() . '_' . $infodocs->getClientOriginalName();
+                $infodocs->move(public_path('docs'), $docName);
                 InfoDocs::create([
                     'title' => $request->title,
-                    'info_blog_id' => $infoblog->id,
-                    'docs' => $imageName,
+                    'info_blogs_id' => $infoblog->id,
+                    'docs' => $docName,
                 ]);
-            }
+
         }
         Alert::success('Success', 'Blog has been added successfully');
         return redirect('myblogs');
@@ -198,6 +198,7 @@ class DashboardController extends Controller
                 $blog->photo=$filename;
 
             }
+
             $blog->save();
 //            if (!isNull($request->file('docs'))) {
 //                foreach ($request->file('docs') as $docs) {
