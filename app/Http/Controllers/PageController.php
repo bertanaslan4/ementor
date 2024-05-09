@@ -27,6 +27,14 @@ class PageController extends Controller
         $section = Menu::where('id',$id)->with('children')->first();
         return view('front.pages.menu',compact('section'));
     }
+    public function rehbermentee()
+    {
+        return view('front.pages.rehbermentee');
+    }
+    public function rehbermentor()
+    {
+        return view('front.pages.rehbermentor');
+    }
 
     public function search(Request $request)
     {

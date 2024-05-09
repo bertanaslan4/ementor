@@ -36,7 +36,7 @@
                     <a href="#"><span>S.S.S</span> <span class="menu-arrow"></span></a>
                     <ul style="display: none;">
                         <li><a href="{{route('admin.faqs')}}"> Listele </a></li>
-                        <li><a href="{{route('admin.faqs.create')}}"> Ekle </a></li>
+
 
                     </ul>
                 </li>

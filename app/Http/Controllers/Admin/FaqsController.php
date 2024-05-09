@@ -108,7 +108,7 @@ class FaqsController extends Controller
 
         $content = $dom->saveHTML();
         $faq->answer = $content;
-
+        $faq->status = 1;
         $faq->save();
 
         Alert::success('Başarılı', 'Soru ve cevap başarıyla güncellendi.');

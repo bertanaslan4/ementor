@@ -35,6 +35,15 @@
                         </div>
                     </form>
                 </div>
+                <div class="row mt-3">
+                    <div class="col-6">
+                        <a href="{{route('rehbermentee')}}" class="btn btn-primary">Mentee Rehberi</a>
+                    </div>
+
+                    <div class="col-6">
+                        <a href="{{route('rehbermentor')}}" class="btn btn-primary">Mentor Rehberi</a>
+                    </div>
+                </div>
                 <!-- /Search -->
 
             </div>

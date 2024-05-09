@@ -6,6 +6,8 @@ use App\Http\Requests\InfoBlogRequest;
 use App\Models\Comments;
 use App\Models\InfoBlogs;
 use App\Models\InfoDocs;
+use App\Models\MenteeBlog;
+use App\Models\Relations;
 use App\Models\User;
 use App\Models\UserInfo;
 use Illuminate\Http\Request;
@@ -136,6 +138,7 @@ class DashboardController extends Controller
     public function storeBlog(Request $request)
     {
         $file = $request->file('photo');
+
         if ($file) {
             $filename = time() . '_' . $file->getClientOriginalName();
             $file->move(public_path('images'), $filename);
@@ -166,6 +169,19 @@ class DashboardController extends Controller
                     'info_blogs_id' => $infoblog->id,
                     'docs' => $docName,
                 ]);
+
+        }
+        if($request->mentee == 'on')
+        {
+            $user_id=auth()->user()->id;
+            $mentee=Relations::where('mentor_id', $user_id)->get();
+            $menteeBlog = MenteeBlog::create([
+                'mentee_id' => $mentee->first()->mentee_id,
+                'blog_id' => $infoblog->id,
+            ]);
+            $blog = InfoBlogs::find($infoblog->id);
+            $blog->status = 2;
+            $blog->save();
 
         }
         Alert::success('Success', 'Blog has been added successfully');

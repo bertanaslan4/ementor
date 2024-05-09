@@ -5,9 +5,14 @@
     <div class="breadcrumb-bar">
         <div class="container">
             <div class="row text-center">
-                <div class="col-md-12 col-12">
+                <div class="col-md-10 col-10">
                     <h2 class="breadcrumb-title">Sıkça Sorulan Sorular</h2>
                 </div>
+                @if(auth()->check())
+                    <div class="col-md-2 col-2">
+                        <a href="{{route('faqs.create')}}" class="btn btn-primary">Soru Ekle</a>
+                    </div>
+                @endif
             </div>
         </div>
     </div>

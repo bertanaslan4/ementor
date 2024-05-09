@@ -61,6 +61,19 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="service-fields mb-3">
+
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <div class="form-check form-check-xs custom-checkbox">
+                                                <input type="checkbox" class="form-check-input" name="mentee" id="mentee" >
+                                                <label class="form-check-label" for="mentee">Sadece Mentee için İçerik</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
                             <div class="service-fields mb-3">
                                 <h4 class="heading-2">Blog Dökümanı </h4>

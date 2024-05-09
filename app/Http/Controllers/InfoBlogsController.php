@@ -11,8 +11,10 @@ class InfoBlogsController extends Controller
 {
     public function index()
     {
-        $blogs = InfoBlogs::with('user')->orderBy('id','desc')->paginate(6);
-        return view('front.pages.infoblogs',compact('blogs'));
+        $blogs = InfoBlogs::with('user')->where('status',1)->orderBy('id','desc')->paginate(6);
+        $blogsmentee = InfoBlogs::with('user')->where('status',2)
+            ->join('mentee_blog','info_blogs.id','=','mentee_blog.blog_id')->where('mentee_blog.mentee_id',auth()->user()->id)->get();
+        return view('front.pages.infoblogs',compact('blogs','blogsmentee'));
     }
     public function detail($id)
     {

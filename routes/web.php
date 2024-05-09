@@ -44,6 +44,8 @@ Route::get('/email/verify', [LoginController::class, 'verify'])->name('verificat
 Route::post('/search',[PageController::class, 'search'])->name('search');
 
 Route::middleware('auth')->group(function () {
+    Route::get('/rehbermentee', [PageController::class, 'rehbermentee'])->name('rehbermentee');
+    Route::get('/rehbermentor', [PageController::class, 'rehbermentor'])->name('rehbermentor');
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/myblogs', [DashboardController::class, 'myBlogs'])->name('myblogs');
     Route::get('/addblog', [DashboardController::class, 'addBlog'])->name('addblog');
@@ -55,7 +57,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/broadcast', [MessagesController::class, 'broadcast']);
     Route::post('/receive', [MessagesController::class, 'receive']);
     Route::post('/send-mentee-message', [MessagesController::class, 'sendMessage'])->name('send-mentee-message');
-
+    Route::get('/faqs/create', [FaqsController::class, 'create'])->name('faqs.create');
+    Route::post('/faqs/store',[FaqsController::class, 'store'])->name('faqs.store');
     Route::get('/profilesettings', [DashboardController::class, 'profilesettings'])->name('profilesettings');
     Route::post('/profilesettings', [DashboardController::class, 'updateProfile'])->name('profilesettings.update');
     Route::post('comment',[CommentsController::class, 'create'])->name('comment.create');

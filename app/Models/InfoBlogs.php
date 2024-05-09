@@ -27,4 +27,8 @@ class InfoBlogs extends Model
     {
         return $this->hasMany(InfoDocs::class);
     }
+    public function menteeBlogs()
+    {
+        return $this->hasMany(MenteeBlog::class);
+    }
 }
